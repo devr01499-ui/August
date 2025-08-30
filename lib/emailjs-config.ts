@@ -2,11 +2,11 @@
 // This file contains the setup instructions and configuration for EmailJS
 
 export const EMAILJS_CONFIG = {
-  // Replace these with your actual EmailJS credentials
-  SERVICE_ID: 'service_admirerx', // Your EmailJS service ID
-  TEMPLATE_ID: 'template_admirerx_contact', // Your EmailJS template ID
-  PUBLIC_KEY: 'YOUR_PUBLIC_KEY', // Your EmailJS public key
-  TO_EMAIL: 'devr01499@gmail.com' // Target email address
+  // Environment variables for EmailJS credentials
+  SERVICE_ID: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_admirerx',
+  TEMPLATE_ID: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_admirerx_contact',
+  PUBLIC_KEY: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY',
+  TO_EMAIL: process.env.NEXT_PUBLIC_EMAILJS_TO_EMAIL || 'devr01499@gmail.com'
 }
 
 // EmailJS Template Structure (to be created in EmailJS dashboard):

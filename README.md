@@ -1,4 +1,6 @@
-# ADMIRERX - Business Website
+# AdmirerX Website
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/devr01499-ui/August)
 
 A modern, responsive single-page business website built with Next.js, React, Tailwind CSS, and Framer Motion. Features a contact form integrated with EmailJS for seamless communication.
 
