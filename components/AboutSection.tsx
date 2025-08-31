@@ -83,20 +83,6 @@ export default function AboutSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
-            
-            {/* Floating Stats Card */}
-            <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 1 }}
-              viewport={{ once: true }}
-              className="absolute -bottom-6 -left-6 bg-white rounded-lg shadow-xl p-6 max-w-xs"
-            >
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary-600 mb-2">500+</div>
-                <div className="text-sm text-gray-600">Happy Clients Worldwide</div>
-              </div>
-            </motion.div>
           </motion.div>
         </div>
       </div>

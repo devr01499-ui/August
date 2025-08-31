@@ -93,13 +93,16 @@ export default function ServicesSection() {
                   ))}
                 </ul>
 
-                {/* Learn More Button */}
+                {/* Schedule Appointment Button */}
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                  }}
                   className="mt-6 w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
                 >
-                  Learn More
+                  Schedule Appointment
                 </motion.button>
               </div>
             </motion.div>

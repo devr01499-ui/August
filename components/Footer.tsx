@@ -115,17 +115,6 @@ export default function Footer() {
             <div className="text-gray-300 text-sm mb-4 md:mb-0">
               © 2024 ADMIRERX. All rights reserved.
             </div>
-            <div className="text-gray-300 text-sm">
-              Web design by{' '}
-              <a 
-                href="https://b12.io" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-white hover:text-primary-300 transition-colors duration-200"
-              >
-                B12
-              </a>
-            </div>
           </div>
         </motion.div>
       </div>

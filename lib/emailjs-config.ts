@@ -5,7 +5,7 @@ export const EMAILJS_CONFIG = {
   // Environment variables for EmailJS credentials
   SERVICE_ID: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_admirerx',
   TEMPLATE_ID: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_admirerx_contact',
-  PUBLIC_KEY: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY',
+  PUBLIC_KEY: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'x9Mlm_5Uv0iRxcxdN',
   TO_EMAIL: process.env.NEXT_PUBLIC_EMAILJS_TO_EMAIL || 'devr01499@gmail.com'
 }
 
@@ -26,6 +26,8 @@ Contact Details:
 - Email: {{from_email}}
 - Phone: {{from_phone}}
 - Message: {{message}}
+- Preferred Appointment Date: {{appointment_date}}
+- Preferred Time Slot: {{appointment_time}}
 
 Please respond to this inquiry at your earliest convenience.
 
@@ -37,6 +39,8 @@ Template Variables:
 - {{from_email}} - Sender's email
 - {{from_phone}} - Sender's phone number
 - {{message}} - Sender's message
+- {{appointment_date}} - Preferred appointment date
+- {{appointment_time}} - Preferred time slot
 - {{reply_to}} - Reply-to email (same as from_email)
 */
 

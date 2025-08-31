@@ -11,13 +11,48 @@ export default function ContactSection() {
     email: '',
     phone: '',
     message: '',
+    appointmentDate: '',
+    appointmentTime: '',
     allowStorage: false
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const formRef = useRef<HTMLFormElement>(null)
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  // Generate time slots for working hours (10:00 AM - 6:00 PM IST)
+  const generateTimeSlots = () => {
+    const slots = []
+    for (let hour = 10; hour <= 18; hour++) {
+      const time = `${hour.toString().padStart(2, '0')}:00`
+      slots.push(time)
+      if (hour < 18) {
+        slots.push(`${hour.toString().padStart(2, '0')}:30`)
+      }
+    }
+    return slots
+  }
+
+  // Check if selected date is a working day (Monday to Saturday)
+  const isWorkingDay = (dateString: string) => {
+    const date = new Date(dateString)
+    const day = date.getDay()
+    return day >= 1 && day <= 6 // Monday = 1, Saturday = 6
+  }
+
+  // Get minimum date (today)
+  const getMinDate = () => {
+    const today = new Date()
+    return today.toISOString().split('T')[0]
+  }
+
+  // Get maximum date (3 months from today)
+  const getMaxDate = () => {
+    const maxDate = new Date()
+    maxDate.setMonth(maxDate.getMonth() + 3)
+    return maxDate.toISOString().split('T')[0]
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target
     setFormData(prev => ({
       ...prev,
@@ -44,6 +79,8 @@ export default function ContactSection() {
         from_email: formData.email,
         from_phone: formData.phone,
         message: formData.message,
+        appointment_date: formData.appointmentDate,
+        appointment_time: formData.appointmentTime,
         reply_to: formData.email
       }
 
@@ -62,6 +99,8 @@ export default function ContactSection() {
           email: '',
           phone: '',
           message: '',
+          appointmentDate: '',
+          appointmentTime: '',
           allowStorage: false
         })
         if (formRef.current) {
@@ -156,6 +195,48 @@ export default function ContactSection() {
               />
             </div>
 
+            {/* Appointment Date and Time Row */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="appointmentDate" className="block text-sm font-medium text-gray-700 mb-2">
+                  Preferred Appointment Date *
+                </label>
+                <input
+                  type="date"
+                  id="appointmentDate"
+                  name="appointmentDate"
+                  value={formData.appointmentDate}
+                  onChange={handleInputChange}
+                  min={getMinDate()}
+                  max={getMaxDate()}
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors duration-200"
+                />
+                <p className="text-xs text-gray-500 mt-1">Working days: Monday to Saturday</p>
+              </div>
+              <div>
+                <label htmlFor="appointmentTime" className="block text-sm font-medium text-gray-700 mb-2">
+                  Preferred Time Slot *
+                </label>
+                <select
+                  id="appointmentTime"
+                  name="appointmentTime"
+                  value={formData.appointmentTime}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors duration-200"
+                >
+                  <option value="">Select a time slot</option>
+                  {generateTimeSlots().map((time) => (
+                    <option key={time} value={time}>
+                      {time} IST
+                    </option>
+                  ))}
+                </select>
+                <p className="text-xs text-gray-500 mt-1">Working hours: 10:00 AM - 6:00 PM IST</p>
+              </div>
+            </div>
+
             {/* Message */}
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
@@ -196,7 +277,7 @@ export default function ContactSection() {
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg"
               >
-                Thank you! Your message has been sent successfully. We'll get back to you soon.
+                Thank you! Your appointment request has been sent successfully. We'll confirm your appointment at {formData.appointmentDate} at {formData.appointmentTime} IST and get back to you soon.
               </motion.div>
             )}
 
@@ -229,13 +310,8 @@ export default function ContactSection() {
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
-          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center"
+          className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 text-center"
         >
-          <div className="bg-white rounded-lg p-6 shadow-lg">
-            <div className="text-3xl mb-4">📧</div>
-            <h3 className="font-semibold text-gray-900 mb-2">Email</h3>
-            <p className="text-gray-600">devr01499@gmail.com</p>
-          </div>
           <div className="bg-white rounded-lg p-6 shadow-lg">
             <div className="text-3xl mb-4">🌐</div>
             <h3 className="font-semibold text-gray-900 mb-2">Website</h3>
@@ -244,7 +320,7 @@ export default function ContactSection() {
           <div className="bg-white rounded-lg p-6 shadow-lg">
             <div className="text-3xl mb-4">⏰</div>
             <h3 className="font-semibold text-gray-900 mb-2">Business Hours</h3>
-            <p className="text-gray-600">24/7 Support Available</p>
+            <p className="text-gray-600">Mon-Sat: 10:00 AM - 6:00 PM IST</p>
           </div>
         </motion.div>
       </div>
