@@ -1,0 +1,464 @@
+[1mdiff --git a/ENV_TEMPLATE.md b/ENV_TEMPLATE.md[m
+[1mnew file mode 100644[m
+[1mindex 0000000..4360cd4[m
+[1m--- /dev/null[m
+[1m+++ b/ENV_TEMPLATE.md[m
+[36m@@ -0,0 +1,53 @@[m
+[32m+[m[32m# Environment Variables Template for ADMIRERX[m
+[32m+[m
+[32m+[m[32m## 🚀 Production Environment (.env.local)[m
+[32m+[m
+[32m+[m[32mCreate a file called `.env.local` in your project root with these variables:[m
+[32m+[m
+[32m+[m[32m```bash[m
+[32m+[m[32m# Site Configuration[m
+[32m+[m[32mNEXT_PUBLIC_SITE_URL=https://admirerx.com[m
+[32m+[m
+[32m+[m[32m# EmailJS Configuration[m
+[32m+[m[32mNEXT_PUBLIC_EMAILJS_SERVICE_ID=service_n9ihigq[m
+[32m+[m[32mNEXT_PUBLIC_EMAILJS_TEMPLATE_ID=template_gkhcy08[m
+[32m+[m[32mNEXT_PUBLIC_EMAILJS_PUBLIC_KEY=x9Mlm_5Uv0iRxcxdN[m
+[32m+[m[32mNEXT_PUBLIC_EMAILJS_TO_EMAIL=devr01499@gmail.com[m
+[32m+[m[32m```[m
+[32m+[m
+[32m+[m[32m## 🔧 Development Environment (.env.development.local)[m
+[32m+[m
+[32m+[m[32mFor local development, you can also create `.env.development.local`:[m
+[32m+[m
+[32m+[m[32m```bash[m
+[32m+[m[32m# Development Site URL[m
+[32m+[m[32mNEXT_PUBLIC_SITE_URL=http://localhost:3000[m
+[32m+[m
+[32m+[m[32m# EmailJS Configuration (same as production)[m
+[32m+[m[32mNEXT_PUBLIC_EMAILJS_SERVICE_ID=service_n9ihigq[m
+[32m+[m[32mNEXT_PUBLIC_EMAILJS_TEMPLATE_ID=template_gkhcy08[m
+[32m+[m[32mNEXT_PUBLIC_EMAILJS_PUBLIC_KEY=x9Mlm_5Uv0iRxcxdN[m
+[32m+[m[32mNEXT_PUBLIC_EMAILJS_TO_EMAIL=devr01499@gmail.com[m
+[32m+[m[32m```[m
+[32m+[m
+[32m+[m[32m## 📝 Setup Instructions[m
+[32m+[m
+[32m+[m[32m1. **Copy the production template** above[m
+[32m+[m[32m2. **Create `.env.local`** file in your project root[m
+[32m+[m[32m3. **Paste the configuration** and save[m
+[32m+[m[32m4. **Restart your development server**: `npm run dev`[m
+[32m+[m
+[32m+[m[32m## ⚠️ Important Notes[m
+[32m+[m
+[32m+[m[32m- **Never commit** `.env.local` to version control[m
+[32m+[m[32m- **Use HTTPS URLs** in production[m
+[32m+[m[32m- **Test EmailJS** before deploying[m
+[32m+[m[32m- **Update site URL** when you have your actual domain[m
+[32m+[m
+[32m+[m[32m## 🧪 Testing[m
+[32m+[m
+[32m+[m[32mAfter setup, test the contact form:[m
+[32m+[m[32m1. Fill out all required fields[m
+[32m+[m[32m2. Submit the form[m
+[32m+[m[32m3. Check your email (devr01499@gmail.com)[m
+[32m+[m[32m4. Verify EmailJS dashboard shows successful sends[m
+[1mdiff --git a/README.md b/README.md[m
+[1mindex 07d2ae1..27b662e 100644[m
+[1m--- a/README.md[m
+[1m+++ b/README.md[m
+[36m@@ -60,7 +60,7 @@[m [mA modern, responsive single-page business website built with Next.js, React, Tai[m
+    ```[m
+ [m
+ 6. **Open your browser**[m
+[31m-   Navigate to [http://localhost:3000](http://localhost:3000)[m
+[32m+[m[32m   Navigate to [http://localhost:3000](http://localhost:3000) (development)[m
+ [m
+ ## 📧 EmailJS Setup[m
+ [m
+[1mdiff --git a/app/api/contact/route.ts b/app/api/contact/route.ts[m
+[1mdeleted file mode 100644[m
+[1mindex 14227ca..0000000[m
+[1m--- a/app/api/contact/route.ts[m
+[1m+++ /dev/null[m
+[36m@@ -1,202 +0,0 @@[m
+[31m-import { NextRequest, NextResponse } from 'next/server'[m
+[31m-import nodemailer from 'nodemailer'[m
+[31m-[m
+[31m-// Email configuration with proper environment variable names[m
+[31m-const emailConfig = {[m
+[31m-  host: process.env.SMTP_HOST || 'smtp.gmail.com',[m
+[31m-  port: parseInt(process.env.SMTP_PORT || '587'),[m
+[31m-  secure: false, // true for 465, false for other ports[m
+[31m-  auth: {[m
+[31m-    user: process.env.SMTP_USER || 'devr01499@gmail.com',[m
+[31m-    pass: process.env.SMTP_PASS || '',[m
+[31m-  },[m
+[31m-  tls: {[m
+[31m-    rejectUnauthorized: false[m
+[31m-  }[m
+[31m-}[m
+[31m-[m
+[31m-export async function POST(request: NextRequest) {[m
+[31m-  try {[m
+[31m-    const body = await request.json()[m
+[31m-    const { name, email, phone, message, appointmentDate, appointmentTime } = body[m
+[31m-[m
+[31m-    // Validate required fields[m
+[31m-    if (!name || !email || !message || !appointmentDate || !appointmentTime) {[m
+[31m-      return NextResponse.json([m
+[31m-        { [m
+[31m-          success: false,[m
+[31m-          error: 'Missing required fields. Please fill in all required fields.' [m
+[31m-        },[m
+[31m-        { status: 400 }[m
+[31m-      )[m
+[31m-    }[m
+[31m-[m
+[31m-    // Validate email format[m
+[31m-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/[m
+[31m-    if (!emailRegex.test(email)) {[m
+[31m-      return NextResponse.json([m
+[31m-        { [m
+[31m-          success: false,[m
+[31m-          error: 'Invalid email format. Please enter a valid email address.' [m
+[31m-        },[m
+[31m-        { status: 400 }[m
+[31m-      )[m
+[31m-    }[m
+[31m-[m
+[31m-    // Check if SMTP credentials are configured[m
+[31m-    if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {[m
+[31m-      console.error('SMTP credentials not configured')[m
+[31m-      return NextResponse.json([m
+[31m-        { [m
+[31m-          success: false,[m
+[31m-          error: 'Email service not configured. Please contact administrator.' [m
+[31m-        },[m
+[31m-        { status: 500 }[m
+[31m-      )[m
+[31m-    }[m
+[31m-[m
+[31m-    // Create transporter with proper error handling[m
+[31m-    const transporter = nodemailer.createTransport(emailConfig)[m
+[31m-[m
+[31m-    // Verify SMTP connection[m
+[31m-    try {[m
+[31m-      await transporter.verify()[m
+[31m-      console.log('SMTP connection verified successfully')[m
+[31m-    } catch (verifyError) {[m
+[31m-      console.error('SMTP verification failed:', verifyError)[m
+[31m-      return NextResponse.json([m
+[31m-        { [m
+[31m-          success: false,[m
+[31m-          error: 'Email service temporarily unavailable. Please try again later.' [m
+[31m-        },[m
+[31m-        { status: 500 }[m
+[31m-      )[m
+[31m-    }[m
+[31m-[m
+[31m-    // Email content for admin notification[m
+[31m-    const adminMailOptions = {[m
+[31m-      from: `"ADMIRERX Website" <${process.env.SMTP_USER}>`,[m
+[31m-      to: process.env.EMAIL_TO || process.env.SMTP_USER,[m
+[31m-      replyTo: email,[m
+[31m-      subject: `New Appointment Request from ${name}`,[m
+[31m-      html: `[m
+[31m-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">[m
+[31m-          <h2 style="color: #22c55e;">New Appointment Request - ADMIRERX</h2>[m
+[31m-          [m
+[31m-          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">[m
+[31m-            <h3 style="color: #374151; margin-top: 0;">Contact Information</h3>[m
+[31m-            <p><strong>Name:</strong> ${name}</p>[m
+[31m-            <p><strong>Email:</strong> ${email}</p>[m
+[31m-            <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>[m
+[31m-          </div>[m
+[31m-          [m
+[31m-          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">[m
+[31m-            <h3 style="color: #374151; margin-top: 0;">Appointment Details</h3>[m
+[31m-            <p><strong>Preferred Date:</strong> ${appointmentDate}</p>[m
+[31m-            <p><strong>Preferred Time:</strong> ${appointmentTime} IST</p>[m
+[31m-          </div>[m
+[31m-          [m
+[31m-          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">[m
+[31m-            <h3 style="color: #374151; margin-top: 0;">Message</h3>[m
+[31m-            <p style="white-space: pre-wrap;">${message}</p>[m
+[31m-          </div>[m
+[31m-          [m
+[31m-          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">[m
+[31m-            <p style="color: #6b7280; font-size: 14px;">[m
+[31m-              This message was sent from the ADMIRERX website contact form.<br>[m
+[31m-              Please respond to this inquiry at your earliest convenience.[m
+[31m-            </p>[m
+[31m-          </div>[m
+[31m-        </div>[m
+[31m-      `,[m
+[31m-      text: `[m
+[31m-New Appointment Request - ADMIRERX[m
+[31m-[m
+[31m-Contact Information:[m
+[31m-- Name: ${name}[m
+[31m-- Email: ${email}[m
+[31m-- Phone: ${phone || 'Not provided'}[m
+[31m-[m
+[31m-Appointment Details:[m
+[31m-- Preferred Date: ${appointmentDate}[m
+[31m-- Preferred Time: ${appointmentTime} IST[m
+[31m-[m
+[31m-Message:[m
+[31m-${message}[m
+[31m-[m
+[31m-This message was sent from the ADMIRERX website contact form.[m
+[31m-Please respond to this inquiry at your earliest convenience.[m
+[31m-      `,[m
+[31m-    }[m
+[31m-[m
+[31m-    // Send email to admin[m
+[31m-    await transporter.sendMail(adminMailOptions)[m
+[31m-    console.log('Admin notification email sent successfully')[m
+[31m-[m
+[31m-    // Send confirmation email to user[m
+[31m-    const userMailOptions = {[m
+[31m-      from: `"ADMIRERX" <${process.env.SMTP_USER}>`,[m
+[31m-      to: email,[m
+[31m-      subject: 'Appointment Request Received - ADMIRERX',[m
+[31m-      html: `[m
+[31m-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">[m
+[31m-          <h2 style="color: #22c55e;">Thank you for your appointment request!</h2>[m
+[31m-          [m
+[31m-          <p>Dear ${name},</p>[m
+[31m-          [m
+[31m-          <p>We have received your appointment request and will get back to you shortly to confirm your appointment.</p>[m
+[31m-          [m
+[31m-          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">[m
+[31m-            <h3 style="color: #374151; margin-top: 0;">Your Request Details</h3>[m
+[31m-            <p><strong>Appointment Date:</strong> ${appointmentDate}</p>[m
+[31m-            <p><strong>Preferred Time:</strong> ${appointmentTime} IST</p>[m
+[31m-            <p><strong>Message:</strong> ${message}</p>[m
+[31m-          </div>[m
+[31m-          [m
+[31m-          <p>We will contact you within 24 hours to confirm your appointment and discuss your requirements.</p>[m
+[31m-          [m
+[31m-          <p>Best regards,<br>The ADMIRERX Team</p>[m
+[31m-          [m
+[31m-          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">[m
+[31m-            <p style="color: #6b7280; font-size: 12px;">[m
+[31m-              This is an automated confirmation email. Please do not reply to this email.[m
+[31m-            </p>[m
+[31m-          </div>[m
+[31m-        </div>[m
+[31m-      `,[m
+[31m-    }[m
+[31m-[m
+[31m-    await transporter.sendMail(userMailOptions)[m
+[31m-    console.log('User confirmation email sent successfully')[m
+[31m-[m
+[31m-    return NextResponse.json([m
+[31m-      { [m
+[31m-        success: true, [m
+[31m-        message: 'Appointment request sent successfully! We will confirm your appointment and get back to you soon.' [m
+[31m-      },[m
+[31m-      { status: 200 }[m
+[31m-    )[m
+[31m-[m
+[31m-  } catch (error) {[m
+[31m-    console.error('Contact form error:', error)[m
+[31m-    [m
+[31m-    // Return specific error messages based on error type[m
+[31m-    if (error && typeof error === 'object' && 'code' in error && error.code === 'EAUTH') {[m
+[31m-      return NextResponse.json([m
+[31m-        { [m
+[31m-          success: false,[m
+[31m-          error: 'Email authentication failed. Please contact administrator.' [m
+[31m-        },[m
+[31m-        { status: 500 }[m
+[31m-      )[m
+[31m-    }[m
+[31m-    [m
+[31m-    return NextResponse.json([m
+[31m-      { [m
+[31m-        success: false,[m
+[31m-        error: 'Failed to send appointment request. Please try again or contact us directly.' [m
+[31m-      },[m
+[31m-      { status: 500 }[m
+[31m-    )[m
+[31m-  }[m
+[31m-}[m
+[1mdiff --git a/app/layout.tsx b/app/layout.tsx[m
+[1mindex e1ad28f..592dff4 100644[m
+[1m--- a/app/layout.tsx[m
+[1m+++ b/app/layout.tsx[m
+[36m@@ -9,10 +9,18 @@[m [mexport const metadata: Metadata = {[m
+   description: 'Empower your business with innovative BPO and IT solutions. Unlock efficiency with AdmirerX - Customer Support, IT Solutions, and Data Entry Services.',[m
+   keywords: 'BPO, IT Solutions, Customer Support, Data Entry, Business Process Outsourcing',[m
+   authors: [{ name: 'ADMIRERX' }],[m
+[32m+[m[32m  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://admirerx.com'),[m
+   openGraph: {[m
+     title: 'ADMIRERX - Innovative BPO and IT Solutions',[m
+     description: 'Empower your business with innovative BPO and IT solutions.',[m
+     type: 'website',[m
+[32m+[m[32m    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://admirerx.com',[m
+[32m+[m[32m    siteName: 'ADMIRERX',[m
+[32m+[m[32m  },[m
+[32m+[m[32m  twitter: {[m
+[32m+[m[32m    card: 'summary_large_image',[m
+[32m+[m[32m    title: 'ADMIRERX - Innovative BPO and IT Solutions',[m
+[32m+[m[32m    description: 'Empower your business with innovative BPO and IT solutions.',[m
+   },[m
+ }[m
+ [m
+[1mdiff --git a/app/page.tsx b/app/page.tsx[m
+[1mindex 235c04a..a568a55 100644[m
+[1m--- a/app/page.tsx[m
+[1m+++ b/app/page.tsx[m
+[36m@@ -1,24 +1,13 @@[m
+ 'use client'[m
+ [m
+[31m-import { useEffect } from 'react'[m
+ import TopBar from '@/components/TopBar'[m
+ import HeroSection from '@/components/HeroSection'[m
+ import AboutSection from '@/components/AboutSection'[m
+ import ServicesSection from '@/components/ServicesSection'[m
+ import ContactSection from '@/components/ContactSection'[m
+ import Footer from '@/components/Footer'[m
+[31m-import { EMAILJS_CONFIG } from '@/lib/emailjs-config'[m
+ [m
+ export default function Home() {[m
+[31m-  useEffect(() => {[m
+[31m-    // Initialize EmailJS[m
+[31m-    const initEmailJS = async () => {[m
+[31m-      const emailjs = await import('@emailjs/browser')[m
+[31m-      emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY)[m
+[31m-    }[m
+[31m-    initEmailJS()[m
+[31m-  }, [])[m
+[31m-[m
+   return ([m
+     <main className="min-h-screen bg-white">[m
+       <TopBar />[m
+[1mdiff --git a/package-lock.json b/package-lock.json[m
+[1mindex 1c462c3..ae1554f 100644[m
+[1m--- a/package-lock.json[m
+[1m+++ b/package-lock.json[m
+[36m@@ -9,10 +9,8 @@[m
+       "version": "0.1.0",[m
+       "dependencies": {[m
+         "@emailjs/browser": "^3.11.0",[m
+[31m-        "@types/nodemailer": "^7.0.1",[m
+         "framer-motion": "^10.16.16",[m
+[31m-        "next": "14.0.4",[m
+[31m-        "nodemailer": "^7.0.6",[m
+[32m+[m[32m        "next": "^14.2.32",[m
+         "react": "^18",[m
+         "react-dom": "^18"[m
+       },[m
+[36m@@ -41,684 +39,6 @@[m
+         "url": "https://github.com/sponsors/sindresorhus"[m
+       }[m
+     },[m
+[31m-    "node_modules/@aws-crypto/sha256-browser": {[m
+[31m-      "version": "5.2.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@aws-crypto/sha256-browser/-/sha256-browser-5.2.0.tgz",[m
+[31m-      "integrity": "sha512-AXfN/lGotSQwu6HNcEsIASo7kWXZ5HYWvfOmSNKDsEqC4OashTp8alTmaz+F7TC2L083SFv5RdB+qU3Vs1kZqw==",[m
+[31m-      "license": "Apache-2.0",[m
+[31m-      "dependencies": {[m
+[31m-        "@aws-crypto/sha256-js": "^5.2.0",[m
+[31m-        "@aws-crypto/supports-web-crypto": "^5.2.0",[m
+[31m-        "@aws-crypto/util": "^5.2.0",[m
+[31m-        "@aws-sdk/types": "^3.222.0",[m
+[31m-        "@aws-sdk/util-locate-window": "^3.0.0",[m
+[31m-        "@smithy/util-utf8": "^2.0.0",[m
+[31m-        "tslib": "^2.6.2"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/@aws-crypto/sha256-browser/node_modules/@smithy/is-array-buffer": {[m
+[31m-      "version": "2.2.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@smithy/is-array-buffer/-/is-array-buffer-2.2.0.tgz",[m
+[31m-      "integrity": "sha512-GGP3O9QFD24uGeAXYUjwSTXARoqpZykHadOmA8G5vfJPK0/DC67qa//0qvqrJzL1xc8WQWX7/yc7fwudjPHPhA==",[m
+[31m-      "license": "Apache-2.0",[m
+[31m-      "dependencies": {[m
+[31m-        "tslib": "^2.6.2"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=14.0.0"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/@aws-crypto/sha256-browser/node_modules/@smithy/util-buffer-from": {[m
+[31m-      "version": "2.2.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@smithy/util-buffer-from/-/util-buffer-from-2.2.0.tgz",[m
+[31m-      "integrity": "sha512-IJdWBbTcMQ6DA0gdNhh/BwrLkDR+ADW5Kr1aZmd4k3DIF6ezMV4R2NIAmT08wQJ3yUK82thHWmC/TnK/wpMMIA==",[m
+[31m-      "license": "Apache-2.0",[m
+[31m-      "dependencies": {[m
+[31m-        "@smithy/is-array-buffer": "^2.2.0",[m
+[31m-        "tslib": "^2.6.2"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=14.0.0"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/@aws-crypto/sha256-browser/node_modules/@smithy/util-utf8": {[m
+[31m-      "version": "2.3.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@smithy/util-utf8/-/util-utf8-2.3.0.tgz",[m
+[31m-      "integrity": "sha512-R8Rdn8Hy72KKcebgLiv8jQcQkXoLMOGGv5uI1/k0l+snqkOzQ1R0ChUBCxWMlBsFMekWjq0wRudIweFs7sKT5A==",[m
+[31m-      "license": "Apache-2.0",[m
+[31m-      "dependencies": {[m
+[31m-        "@smithy/util-buffer-from": "^2.2.0",[m
+[31m-        "tslib": "^2.6.2"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=14.0.0"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/@aws-crypto/sha256-js": {[m
+[31m-      "version": "5.2.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@aws-crypto/sha256-js/-/sha256-js-5.2.0.tgz",[m
+[31m-      "integrity": "sha512-FFQQyu7edu4ufvIZ+OadFpHHOt+eSTBaYaki44c+akjg7qZg9oOQeLlk77F6tSYqjDAFClrHJk9tMf0HdVyOvA==",[m
+[31m-      "license": "Apache-2.0",[m
+[31m-      "dependencies": {[m
+[31m-        "@aws-crypto/util": "^5.2.0",[m
+[31m-        "@aws-sdk/types": "^3.222.0",[m
+[31m-        "tslib": "^2.6.2"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=16.0.0"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/@aws-crypto/supports-web-crypto": {[m
+[31m-      "version": "5.2.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@aws-crypto/supports-web-crypto/-/supports-web-crypto-5.2.0.tgz",[m
+[31m-      "integrity": "sha512-iAvUotm021kM33eCdNfwIN//F77/IADDSs58i+MDaOqFrVjZo9bAal0NK7HurRuWLLpF1iLX7gbWrjHjeo+YFg==",[m
+[31m-      "license": "Apache-2.0",[m
+[31m-      "dependencies": {[m
+[31m-        "tslib": "^2.6.2"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/@aws-crypto/util": {[m
+[31m-      "version": "5.2.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@aws-crypto/util/-/util-5.2.0.tgz",[m
+[31m-      "integrity": "sha512-4RkU9EsI6ZpBve5fseQlGNUWKMa1RLPQ1dnjnQoe07ldfIzcsGb5hC5W0Dm7u423KWzawlrpbjXBrXCEv9zazQ==",[m
+[31m-      "license": "Apache-2.0",[m
+[31m-      "dependencies": {[m
+[31m-        "@aws-sdk/types": "^3.222.0",[m
+[31m-        "@smithy/util-utf8": "^2.0.0",[m
+[31m-        "tslib": "^2.6.2"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/@aws-crypto/util/node_modules/@smithy/is-array-buffer": {[m
+[31m-      "version": "2.2.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@smithy/is-array-buffer/-/is-array-buffer-2.2.0.tgz",[m
+[31m-      "integrity": "sha512-GGP3O9QFD24uGeAXYUjwSTXARoqpZykHadOmA8G5vfJPK0/DC67qa//0qvqrJzL1xc8WQWX7/yc7fwudjPHPhA==",[m
+[31m-      "license": "Apache-2.0",[m
+[31m-      "dependencies": {[m
+[31m-        "tslib": "^2.6.2"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=14.0.0"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/@aws-crypto/util/node_modules/@smithy/util-buffer-from": {[m
+[31m-      "version": "2.2.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@smithy/util-buffer-from/-/util-buffer-from-2.2.0.tgz",[m
+[31m-      "integrity": "sha512-IJdWBbTcMQ6DA0gdNhh/BwrLkDR+ADW5Kr1aZmd4k3DIF6ezMV4R2NIAmT08wQJ3yUK82thHWmC/TnK/wpMMIA==",[m
+[31m-      "license": "Apache-2.0",[m
+[31m-      "dependencies": {[m
+[31m-        "@smithy/is-array-buffer": "^2.2.0",[m
+[31m-        "tslib": "^2.6.2"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=14.0.0"[m
+[31m-      }[m
+[3

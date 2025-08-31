@@ -1,9 +1,7 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
-import emailjs from '@emailjs/browser'
-import { EMAILJS_CONFIG } from '@/lib/emailjs-config'
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -19,11 +17,6 @@ export default function ContactSection() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [submitMessage, setSubmitMessage] = useState<string>('')
   const formRef = useRef<HTMLFormElement>(null)
-
-  // Initialize EmailJS
-  useEffect(() => {
-    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY)
-  }, [])
 
   // Generate time slots for working hours (10:00 AM - 6:00 PM IST)
   const generateTimeSlots = () => {
@@ -79,29 +72,26 @@ export default function ContactSection() {
     setSubmitMessage('')
 
     try {
-      // Prepare template parameters for EmailJS
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        from_phone: formData.phone,
-        message: formData.message,
-        appointment_date: formData.appointmentDate,
-        appointment_time: formData.appointmentTime,
-        reply_to: formData.email,
-        to_email: EMAILJS_CONFIG.TO_EMAIL
-      }
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          appointmentDate: formData.appointmentDate,
+          appointmentTime: formData.appointmentTime,
+        }),
+      })
 
-      // Send email using EmailJS
-      const result = await emailjs.send(
-        EMAILJS_CONFIG.SERVICE_ID,
-        EMAILJS_CONFIG.TEMPLATE_ID,
-        templateParams,
-        EMAILJS_CONFIG.PUBLIC_KEY
-      )
+      const result = await response.json()
 
-      if (result.status === 200) {
+      if (response.ok && result.success) {
         setSubmitStatus('success')
-        setSubmitMessage('Your appointment request has been sent successfully! We will get back to you soon.')
+        setSubmitMessage(result.message || 'Your appointment request has been sent successfully!')
         setFormData({
           name: '',
           email: '',
@@ -116,12 +106,12 @@ export default function ContactSection() {
         }
       } else {
         setSubmitStatus('error')
-        setSubmitMessage('Sorry, there was an error sending your message. Please try again or contact us directly.')
+        setSubmitMessage(result.error || 'Sorry, there was an error sending your message. Please try again or contact us directly.')
       }
     } catch (error) {
       console.error('Form submission error:', error)
       setSubmitStatus('error')
-      setSubmitMessage('Failed to send message. Please try again or contact us directly.')
+      setSubmitMessage('Network error. Please check your internet connection and try again.')
     } finally {
       setIsSubmitting(false)
     }
