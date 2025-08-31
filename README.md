@@ -60,7 +60,7 @@ A modern, responsive single-page business website built with Next.js, React, Tai
    ```
 
 6. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
+   Navigate to [http://localhost:3000](http://localhost:3000) (development)
 
 ## 📧 EmailJS Setup
 
