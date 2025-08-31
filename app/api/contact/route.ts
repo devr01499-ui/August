@@ -13,12 +13,17 @@ const emailConfig = {
 }
 
 export async function POST(request: NextRequest) {
+  const startTime = Date.now()
+  
   try {
     const body = await request.json()
     const { name, email, phone, message, appointmentDate, appointmentTime } = body
 
+    console.log(`[CONTACT FORM] New submission from ${email} at ${new Date().toISOString()}`)
+
     // Validate required fields
     if (!name || !email || !message || !appointmentDate || !appointmentTime) {
+      console.log(`[CONTACT FORM] Validation failed - missing required fields from ${email}`)
       return NextResponse.json(
         { 
           success: false,
