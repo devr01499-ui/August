@@ -2,8 +2,6 @@
 
 import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
-import emailjs from '@emailjs/browser'
-import { EMAILJS_CONFIG } from '@/lib/emailjs-config'
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -17,6 +15,7 @@ export default function ContactSection() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [submitMessage, setSubmitMessage] = useState<string>('')
   const formRef = useRef<HTMLFormElement>(null)
 
   // Generate time slots for working hours (10:00 AM - 6:00 PM IST)
@@ -70,30 +69,29 @@ export default function ContactSection() {
 
     setIsSubmitting(true)
     setSubmitStatus('idle')
+    setSubmitMessage('');
 
     try {
-      // EmailJS configuration
-      const templateParams = {
-        to_email: EMAILJS_CONFIG.TO_EMAIL,
-        from_name: formData.name,
-        from_email: formData.email,
-        from_phone: formData.phone,
-        message: formData.message,
-        appointment_date: formData.appointmentDate,
-        appointment_time: formData.appointmentTime,
-        reply_to: formData.email
-      }
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          appointmentDate: formData.appointmentDate,
+          appointmentTime: formData.appointmentTime,
+        }),
+      });
 
-      // Send email using EmailJS
-      const result = await emailjs.send(
-        EMAILJS_CONFIG.SERVICE_ID,
-        EMAILJS_CONFIG.TEMPLATE_ID,
-        templateParams,
-        EMAILJS_CONFIG.PUBLIC_KEY
-      )
+      const result = await response.json();
 
-      if (result.status === 200) {
-        setSubmitStatus('success')
+      if (response.ok && result.success) {
+        setSubmitStatus('success');
+        setSubmitMessage(result.message || 'Your appointment request has been sent successfully!');
         setFormData({
           name: '',
           email: '',
@@ -102,18 +100,20 @@ export default function ContactSection() {
           appointmentDate: '',
           appointmentTime: '',
           allowStorage: false
-        })
+        });
         if (formRef.current) {
-          formRef.current.reset()
+          formRef.current.reset();
         }
       } else {
-        setSubmitStatus('error')
+        setSubmitStatus('error');
+        setSubmitMessage(result.error || 'Sorry, there was an error sending your message. Please try again or contact us directly.');
       }
     } catch (error) {
-      console.error('Email sending failed:', error)
-      setSubmitStatus('error')
+      console.error('Email sending failed:', error);
+      setSubmitStatus('error');
+      setSubmitMessage('Sorry, there was an error sending your message. Please try again or contact us directly.');
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
   }
 
@@ -277,7 +277,7 @@ export default function ContactSection() {
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg"
               >
-                Thank you! Your appointment request has been sent successfully. We'll confirm your appointment at {formData.appointmentDate} at {formData.appointmentTime} IST and get back to you soon.
+                {submitMessage}
               </motion.div>
             )}
 
@@ -287,7 +287,7 @@ export default function ContactSection() {
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg"
               >
-                Sorry, there was an error sending your message. Please try again or contact us directly.
+                {submitMessage}
               </motion.div>
             )}
 
