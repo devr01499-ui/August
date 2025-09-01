@@ -91,7 +91,7 @@ export default function ContactSection() {
 
       if (response.ok && result.success) {
         setSubmitStatus('success')
-        setSubmitMessage(result.message || 'Your appointment request has been sent successfully!')
+        setSubmitMessage('✅ Submitted successfully!')
         setFormData({
           name: '',
           email: '',
@@ -106,12 +106,12 @@ export default function ContactSection() {
         }
       } else {
         setSubmitStatus('error')
-        setSubmitMessage(result.error || 'Sorry, there was an error sending your message. Please try again or contact us directly.')
+        setSubmitMessage('❌ Submission failed. Please try again.')
       }
     } catch (error) {
       console.error('Form submission error:', error)
       setSubmitStatus('error')
-      setSubmitMessage('Network error. Please check your internet connection and try again.')
+      setSubmitMessage('❌ Submission failed. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
@@ -299,7 +299,7 @@ export default function ContactSection() {
               whileTap={{ scale: 0.98 }}
               className="w-full bg-primary-600 hover:bg-primary-700 disabled:bg-gray-400 text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
+              {isSubmitting ? 'Submitting...' : 'Send Message'}
             </motion.button>
           </form>
         </motion.div>
