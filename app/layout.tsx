@@ -5,22 +5,25 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'ADMIRERX - Innovative BPO and IT Solutions',
-  description: 'Empower your business with innovative BPO and IT solutions. Unlock efficiency with AdmirerX - Customer Support, IT Solutions, and Data Entry Services.',
-  keywords: 'BPO, IT Solutions, Customer Support, Data Entry, Business Process Outsourcing',
-  authors: [{ name: 'ADMIRERX' }],
+  title: 'AdmirerX – Unlock Efficiency with Customer Support, IT & Data Entry',
+  description: 'AdmirerX helps businesses scale with Customer Support, IT, and Data Entry services powered by efficiency and technology.',
+  keywords: 'AdmirerX, BPO, IT Solutions, Customer Support, Data Entry, Outsourcing',
+  authors: [{ name: 'AdmirerX' }],
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://admirerx.com'),
   openGraph: {
-    title: 'ADMIRERX - Innovative BPO and IT Solutions',
-    description: 'Empower your business with innovative BPO and IT solutions.',
+    title: 'AdmirerX – Unlock Efficiency with Customer Support, IT & Data Entry',
+    description: 'AdmirerX helps businesses scale with Customer Support, IT, and Data Entry services powered by efficiency and technology.',
     type: 'website',
     url: process.env.NEXT_PUBLIC_SITE_URL || 'https://admirerx.com',
-    siteName: 'ADMIRERX',
+    siteName: 'AdmirerX',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ADMIRERX - Innovative BPO and IT Solutions',
-    description: 'Empower your business with innovative BPO and IT solutions.',
+    title: 'AdmirerX – Unlock Efficiency with Customer Support, IT & Data Entry',
+    description: 'AdmirerX helps businesses scale with Customer Support, IT, and Data Entry services powered by efficiency and technology.',
+  },
+  icons: {
+    icon: '/favicon.ico',
   },
 }
 
@@ -31,6 +34,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   )

@@ -4,9 +4,9 @@ import { motion } from 'framer-motion'
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-20 bg-gray-50">
+    <section id="about" className="py-20 bg-deep">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Side - Text Content */}
           <motion.div
             initial={{ x: -50, opacity: 0 }}
@@ -20,19 +20,20 @@ export default function AboutSection() {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-3xl sm:text-4xl font-bold text-gray-900"
+              className="text-4xl font-bold text-white section-title"
             >
-              Innovative BPO and IT solutions
+              Why Choose ADMIRERX?
             </motion.h2>
+            <div className="section-underline mt-3" />
             
             <motion.p 
               initial={{ y: 20, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-              className="text-lg text-gray-600 leading-relaxed"
+              className="text-subheading mb-8 leading-relaxed"
             >
-              At AdmirerX, we specialize in delivering cutting-edge Business Process Outsourcing (BPO) and Information Technology solutions that drive growth and efficiency for businesses worldwide. Our comprehensive suite of services is designed to meet the evolving needs of modern enterprises.
+              ADMIRERX is dedicated to delivering premium BPO services with a combination of AI, skilled professionals, and a global approach. Our mission is to empower businesses with cost-effective and efficient outsourcing solutions.
             </motion.p>
             
             <motion.p 
@@ -40,7 +41,7 @@ export default function AboutSection() {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
               viewport={{ once: true }}
-              className="text-lg text-gray-600 leading-relaxed"
+              className="text-subheading mb-8 leading-relaxed"
             >
               With years of industry experience and a dedicated team of professionals, we provide scalable, cost-effective solutions that help businesses focus on their core competencies while we handle their operational needs with precision and excellence.
             </motion.p>
@@ -50,19 +51,19 @@ export default function AboutSection() {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.8 }}
               viewport={{ once: true }}
-              className="flex flex-wrap gap-4"
+              className="space-y-4"
             >
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-primary-600 rounded-full"></div>
-                <span className="text-gray-700 font-medium">24/7 Customer Support</span>
+              <div className="flex items-center p-4 glass-effect rounded-lg">
+                <div className="w-8 h-8 bg-blue-900/30 rounded-full flex items-center justify-center mr-4 text-blue-400">✓</div>
+                <span className="text-white font-medium">Dedicated Account Management</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-primary-600 rounded-full"></div>
-                <span className="text-gray-700 font-medium">Advanced IT Solutions</span>
+              <div className="flex items-center p-4 glass-effect rounded-lg">
+                <div className="w-8 h-8 bg-blue-900/30 rounded-full flex items-center justify-center mr-4 text-blue-400">✓</div>
+                <span className="text-white font-medium">Enterprise Security Standards</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-primary-600 rounded-full"></div>
-                <span className="text-gray-700 font-medium">Data Management</span>
+              <div className="flex items-center p-4 glass-effect rounded-lg">
+                <div className="w-8 h-8 bg-blue-900/30 rounded-full flex items-center justify-center mr-4 text-blue-400">✓</div>
+                <span className="text-white font-medium">Customizable Service Packages</span>
               </div>
             </motion.div>
           </motion.div>
@@ -73,16 +74,13 @@ export default function AboutSection() {
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="relative"
+            className="w-full md:w-1/2 flex justify-center items-center"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                alt="Business meeting and handshake"
-                className="w-full h-auto object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-            </div>
+            <img 
+              src="/about-image.jpg" 
+              alt="Why Choose ADMIRERX" 
+              className="rounded-2xl shadow-lg object-cover w-full h-full max-h-[350px]" 
+            />
           </motion.div>
         </div>
       </div>

@@ -1,67 +1,147 @@
-# Environment Variables Setup for ADMIRERX Contact Form
+# AdmirerX Website - Environment Setup Guide
 
-## 🔧 Required Configuration
+## 🚨 **CRITICAL: OneDrive Issues**
+This project **MUST NOT** be run from a OneDrive folder due to file permission conflicts with Node.js.
 
-To make the contact form work, you need to set up email credentials. Create a `.env.local` file in your project root with one of these options:
+**Move the project to:** `C:\Projects\admirerx-website` or any non-OneDrive location.
 
-### Option 1: Gmail SMTP (Nodemailer Backend)
+## 📋 **Prerequisites**
 
-```bash
-# Create .env.local file with these variables:
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your-email@gmail.com
-SMTP_PASS=your-app-password
-EMAIL_TO=devr01499@gmail.com
+### 1. Node.js Version
+- **Required:** Node.js 18.x (LTS)
+- **Current:** You have Node.js 22.18.0 (incompatible)
+- **Solution:** Install Node.js 18.x
+
+### 2. Install Node.js 18.x
+
+#### Option A: Using NVM for Windows (Recommended)
+```powershell
+# Install NVM for Windows from: https://github.com/coreybutler/nvm-windows/releases
+# Then run:
+nvm install 18.19.0
+nvm use 18.19.0
+nvm list
 ```
 
-**Setup Steps:**
-1. Go to your Gmail account settings
-2. Enable 2-factor authentication
-3. Generate an "App Password" for this application
-4. Use the app password as SMTP_PASS
+#### Option B: Direct Installer
+1. Download Node.js 18.x LTS from: https://nodejs.org/
+2. Uninstall current Node.js 22.x
+3. Install Node.js 18.x
+4. Restart terminal
 
-### Option 2: EmailJS (Frontend Service)
-
-```bash
-# Create .env.local file with these variables:
-NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
-NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
-NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
-NEXT_PUBLIC_EMAILJS_TO_EMAIL=devr01499@gmail.com
+### 3. Verify Node.js Version
+```powershell
+node --version
+# Should show: v18.x.x
+npm --version
+# Should show: 8.x.x or 9.x.x
 ```
 
-**Setup Steps:**
-1. Follow the EmailJS setup guide in `EMAILJS_SETUP.md`
-2. Get your credentials from EmailJS dashboard
-3. Update the variables above
+## 🛠️ **Project Setup**
 
-## 🚀 Quick Start
+### 1. Move Project Out of OneDrive
+```powershell
+# Copy project to safe location
+Copy-Item -Path "C:\Users\Rohit Kumar Sha\OneDrive\Desktop\21 august" -Destination "C:\Projects\admirerx-website" -Recurse
 
-1. **Copy the example above** to a new file called `.env.local`
-2. **Fill in your actual credentials**
-3. **Restart your development server**: `npm run dev`
-4. **Test the contact form** at http://localhost:3000
+# Navigate to new location
+cd C:\Projects\admirerx-website
+```
 
-## ⚠️ Important Notes
+### 2. Clean Install Dependencies
+```powershell
+# Run the fix script (cleans everything and reinstalls)
+npm run fix:env
+```
 
-- **Choose ONE option** (EmailJS OR Nodemailer), not both
-- **EmailJS is simpler** but has monthly limits (200 emails/month free)
-- **Nodemailer gives full control** but requires Gmail setup
-- **Never commit .env.local** to version control (it's already in .gitignore)
+**What this script does:**
+- Removes `node_modules` folder
+- Deletes `package-lock.json`
+- Cleans npm cache
+- Fresh install of all dependencies
 
-## 🔍 Testing
+### 3. Start Development Server
+```powershell
+npm run dev
+```
 
-After setup, test the contact form:
-1. Fill out all required fields
-2. Select a future appointment date
-3. Choose a time slot
-4. Submit the form
-5. Check your email for confirmation
+**Expected output:**
+```
+> admirerx-website@0.1.0 dev
+> next dev
 
-## 📞 Need Help?
+- ready started server on 0.0.0.0:3000, url: http://localhost:3000
+```
 
-- Check the console for error messages
-- Verify your credentials are correct
-- Ensure your development server is running
-- Check the EmailJS setup guide for detailed instructions
+## 🌐 **Access Website**
+Open your browser and go to: **http://localhost:3000**
+
+## 🔧 **Troubleshooting**
+
+### Issue: "next is not recognized"
+```powershell
+# Solution: Clean reinstall
+npm run fix:env
+```
+
+### Issue: EBADENGINE warnings
+```powershell
+# Solution: Use correct Node.js version
+nvm use 18.19.0
+# or reinstall Node.js 18.x
+```
+
+### Issue: EPERM unlink errors
+```powershell
+# Solution: Move project out of OneDrive
+# Then run:
+npm run fix:env
+```
+
+### Issue: Port 3000 already in use
+```powershell
+# Kill process using port 3000
+netstat -ano | findstr :3000
+taskkill /PID <PID> /F
+```
+
+## 📁 **Project Structure**
+```
+admirerx-website/
+├── app/                    # Next.js 14 app directory
+├── components/            # React components
+├── public/               # Static assets
+├── package.json          # Dependencies & scripts
+├── next.config.js        # Next.js configuration
+├── tailwind.config.js    # Tailwind CSS config
+└── ENV_SETUP.md         # This file
+```
+
+## ✅ **Verification Checklist**
+
+- [ ] Project moved out of OneDrive
+- [ ] Node.js 18.x installed and active
+- [ ] `npm run fix:env` completed successfully
+- [ ] `npm run dev` starts without errors
+- [ ] Website loads on http://localhost:3000
+- [ ] No EBADENGINE warnings
+- [ ] No EPERM errors
+
+## 🚀 **Production Deployment**
+After local testing, deploy to Vercel:
+```powershell
+npm run build
+vercel --prod
+```
+
+## 📞 **Support**
+If you encounter issues:
+1. Ensure you're using Node.js 18.x
+2. Project is NOT in OneDrive
+3. Run `npm run fix:env`
+4. Check the troubleshooting section above
+
+---
+**Last Updated:** $(Get-Date -Format "yyyy-MM-dd")
+**Node.js Version:** 18.x LTS
+**Next.js Version:** 14.2.32

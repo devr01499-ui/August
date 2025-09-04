@@ -7,10 +7,9 @@ export default function TopBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
     { name: 'Services', href: '#services' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'About', href: '#about' },
+    { name: 'Contact', href: '#contact' }
   ]
 
   return (
@@ -18,17 +17,17 @@ export default function TopBar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200"
+      className="fixed top-0 left-0 right-0 z-50 glass"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Main">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <motion.div 
             whileHover={{ scale: 1.05 }}
             className="flex-shrink-0"
           >
-            <a href="#home" className="text-2xl font-bold text-gray-900">
-              ADMIRERX
+            <a href="#home" className="text-2xl font-extrabold">
+              <span className="gradient-text">ADMIRERX</span>
             </a>
           </motion.div>
 
@@ -39,26 +38,20 @@ export default function TopBar() {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+                  className="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-200"
                 >
                   {item.name}
                 </a>
               ))}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-transparent border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-6 py-2 rounded-md text-sm font-medium transition-all duration-200"
-              >
-                Contact
-              </motion.button>
+              {/* Removed Get Started per spec */}
             </div>
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <button
+            <button aria-label="Toggle navigation menu"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-primary-600 focus:outline-none focus:text-primary-600"
+              className="text-gray-300 hover:text-white focus:outline-none"
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {isMenuOpen ? (
@@ -79,20 +72,18 @@ export default function TopBar() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden"
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 glass">
               {navItems.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium"
+                  className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
                 </a>
               ))}
-              <button className="w-full text-left bg-transparent border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-base font-medium transition-all duration-200">
-                Contact
-              </button>
+              {/* Removed Get Started per spec */}
             </div>
           </motion.div>
         )}

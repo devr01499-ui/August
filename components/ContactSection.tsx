@@ -8,6 +8,7 @@ export default function ContactSection() {
     name: '',
     email: '',
     phone: '',
+    service: 'Customer Support',
     message: '',
     appointmentDate: '',
     appointmentTime: '',
@@ -44,12 +45,8 @@ export default function ContactSection() {
     return today.toISOString().split('T')[0]
   }
 
-  // Get maximum date (3 months from today)
-  const getMaxDate = () => {
-    const maxDate = new Date()
-    maxDate.setMonth(maxDate.getMonth() + 3)
-    return maxDate.toISOString().split('T')[0]
-  }
+  // Keep max date extended per spec
+  const getMaxDate = () => '2090-12-31'
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target
@@ -63,7 +60,8 @@ export default function ContactSection() {
     e.preventDefault()
     
     if (!formData.allowStorage) {
-      alert('Please allow us to store your submission to respond to your inquiry.')
+      setSubmitStatus('error')
+      setSubmitMessage('❌ Please allow us to store your submission to respond to your inquiry.')
       return
     }
 
@@ -81,6 +79,7 @@ export default function ContactSection() {
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
+          service: formData.service,
           message: formData.message,
           appointmentDate: formData.appointmentDate,
           appointmentTime: formData.appointmentTime,
@@ -91,11 +90,12 @@ export default function ContactSection() {
 
       if (response.ok && result.success) {
         setSubmitStatus('success')
-        setSubmitMessage('✅ Submitted successfully!')
+        setSubmitMessage('✅ Submitted successfully')
         setFormData({
           name: '',
           email: '',
           phone: '',
+          service: 'customer-support',
           message: '',
           appointmentDate: '',
           appointmentTime: '',
@@ -106,19 +106,19 @@ export default function ContactSection() {
         }
       } else {
         setSubmitStatus('error')
-        setSubmitMessage('❌ Submission failed. Please try again.')
+        setSubmitMessage('❌ Something went wrong. Please try again.')
       }
     } catch (error) {
       console.error('Form submission error:', error)
       setSubmitStatus('error')
-      setSubmitMessage('❌ Submission failed. Please try again.')
+      setSubmitMessage('❌ Something went wrong. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
   }
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
+    <section id="contact" className="py-20 bg-deep">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -128,10 +128,10 @@ export default function ContactSection() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             We're here to assist you!
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-200">
             Get in touch with us to discuss your business needs and discover how we can help you succeed.
           </p>
         </motion.div>
@@ -142,13 +142,13 @@ export default function ContactSection() {
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="bg-white rounded-2xl shadow-xl p-8"
+          className="glass p-8"
         >
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
             {/* Name and Email Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-200 mb-2">
                   Name *
                 </label>
                 <input
@@ -158,12 +158,12 @@ export default function ContactSection() {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors duration-200"
+                  className="w-full px-4 py-3 border border-white/20 rounded-lg bg-[#0c1424]/60 text-white placeholder-gray-300 focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent transition-colors duration-200"
                   placeholder="Your full name"
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-200 mb-2">
                   Email *
                 </label>
                 <input
@@ -173,7 +173,7 @@ export default function ContactSection() {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors duration-200"
+                  className="w-full px-4 py-3 border border-white/20 rounded-lg bg-[#0c1424]/60 text-white placeholder-gray-300 focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent transition-colors duration-200"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -181,7 +181,7 @@ export default function ContactSection() {
 
             {/* Phone */}
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-200 mb-2">
                 Phone Number
               </label>
               <input
@@ -190,15 +190,35 @@ export default function ContactSection() {
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors duration-200"
-                placeholder="+1 (555) 123-4567"
+                className="w-full px-4 py-3 border border-white/20 rounded-lg bg-[#0c1424]/60 text-white placeholder-gray-300 focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent transition-colors duration-200"
+                placeholder="+91 98765 43210"
               />
+            </div>
+
+            {/* Service */}
+            <div>
+              <label htmlFor="service" className="block text-sm font-medium text-gray-200 mb-2">
+                Service
+              </label>
+              <select
+                id="service"
+                name="service"
+                value={formData.service}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 border border-white/20 rounded-lg bg-[#0c1424]/60 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+              >
+                <option value="Customer Support">Customer Support</option>
+                <option value="Data Processing">Data Processing</option>
+                <option value="Lead Generation">Lead Generation</option>
+                <option value="Tech Support">Tech Support</option>
+                <option value="HR Consultancy">HR Consultancy</option>
+              </select>
             </div>
 
             {/* Appointment Date and Time Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="appointmentDate" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="appointmentDate" className="block text-sm font-medium text-gray-200 mb-2">
                   Preferred Appointment Date *
                 </label>
                 <input
@@ -210,12 +230,12 @@ export default function ContactSection() {
                   min={getMinDate()}
                   max={getMaxDate()}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors duration-200"
+                  className="w-full px-4 py-3 border border-white/20 rounded-lg bg-[#0c1424]/60 text-white placeholder-gray-300 focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent transition-colors duration-200"
                 />
                 <p className="text-xs text-gray-500 mt-1">Working days: Monday to Saturday</p>
               </div>
               <div>
-                <label htmlFor="appointmentTime" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="appointmentTime" className="block text-sm font-medium text-gray-200 mb-2">
                   Preferred Time Slot *
                 </label>
                 <select
@@ -224,7 +244,7 @@ export default function ContactSection() {
                   value={formData.appointmentTime}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors duration-200"
+                  className="w-full px-4 py-3 border border-white/20 rounded-lg bg-[#0c1424]/60 text-white focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent transition-colors duration-200"
                 >
                   <option value="">Select a time slot</option>
                   {generateTimeSlots().map((time) => (
@@ -239,7 +259,7 @@ export default function ContactSection() {
 
             {/* Message */}
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="message" className="block text-sm font-medium text-gray-200 mb-2">
                 Message *
               </label>
               <textarea
@@ -249,7 +269,7 @@ export default function ContactSection() {
                 onChange={handleInputChange}
                 required
                 rows={5}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors duration-200 resize-none"
+                className="w-full px-4 py-3 border border-white/20 rounded-lg bg-[#0c1424]/60 text-white placeholder-gray-300 focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent transition-colors duration-200 resize-none"
                 placeholder="Tell us about your business needs and how we can help..."
               />
             </div>
@@ -263,9 +283,9 @@ export default function ContactSection() {
                 checked={formData.allowStorage}
                 onChange={handleInputChange}
                 required
-                className="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                className="mt-1 h-4 w-4 text-[#4f46e5] focus:ring-[#4f46e5] border-white/20 rounded bg-white/10"
               />
-              <label htmlFor="allowStorage" className="text-sm text-gray-600">
+              <label htmlFor="allowStorage" className="text-sm text-gray-200">
                 I allow this website to store my submission so they can respond to my inquiry.
               </label>
             </div>
@@ -275,7 +295,7 @@ export default function ContactSection() {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg"
+                className="toast-success"
               >
                 {submitMessage}
               </motion.div>
@@ -285,7 +305,7 @@ export default function ContactSection() {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg"
+                className="toast-error"
               >
                 {submitMessage}
               </motion.div>
@@ -297,7 +317,7 @@ export default function ContactSection() {
               disabled={isSubmitting}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full bg-primary-600 hover:bg-primary-700 disabled:bg-gray-400 text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200 disabled:cursor-not-allowed"
+              className="w-full btn-gradient disabled:opacity-50 text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200 disabled:cursor-not-allowed"
             >
               {isSubmitting ? 'Submitting...' : 'Send Message'}
             </motion.button>
@@ -315,7 +335,7 @@ export default function ContactSection() {
           <div className="bg-white rounded-lg p-6 shadow-lg">
             <div className="text-3xl mb-4">🌐</div>
             <h3 className="font-semibold text-gray-900 mb-2">Website</h3>
-            <p className="text-gray-600">www.admirerx.com</p>
+            <p className="text-gray-600">www.admirerx.net</p>
           </div>
           <div className="bg-white rounded-lg p-6 shadow-lg">
             <div className="text-3xl mb-4">⏰</div>

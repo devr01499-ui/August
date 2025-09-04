@@ -1,4 +1,24 @@
+# ⚙️ Development Setup
+
+This project is built and tested with **Node 18 LTS**.  
+Before running locally:
+
+```bash
+# If using nvm:
+nvm install 18.20.3
+nvm use 18.20.3
+
+# If you must use Node 20+:
+export NODE_OPTIONS="--max-old-space-size=4096"
+```
+
+---
+
 # AdmirerX Website
+
+## Setup Requirements
+
+- ⚠️ **Node.js 18.x Required** — This project has been tested only on Node 18. Please install Node 18 via nvm-windows or nvm before running `npm install`.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/devr01499-ui/August)
 
