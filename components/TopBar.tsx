@@ -7,9 +7,12 @@ export default function TopBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navItems = [
-    { name: 'Services', href: '#services' },
-    { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Home', href: '/' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Services', href: '/services' },
+    { name: 'Careers', href: '/careers' },
+    { name: 'Partner With Us', href: '/partner' },
+    { name: 'Contact', href: '/contact' }
   ]
 
   return (

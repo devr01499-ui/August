@@ -5,22 +5,22 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'AdmirerX – Unlock Efficiency with Customer Support, IT & Data Entry',
-  description: 'AdmirerX helps businesses scale with Customer Support, IT, and Data Entry services powered by efficiency and technology.',
-  keywords: 'AdmirerX, BPO, IT Solutions, Customer Support, Data Entry, Outsourcing',
+  title: 'AdmirerX — Premium BPO for the Modern Enterprise',
+  description: 'Scalable expertise, global focus, enterprise-grade reliability. Comprehensive BPO solutions designed to help your business scale efficiently while maintaining the highest standards of quality and security.',
+  keywords: 'AdmirerX, BPO, Business Process Outsourcing, Customer Support, Data Processing, Lead Generation, Technical Support, HR Recruitment, Enterprise Solutions',
   authors: [{ name: 'AdmirerX' }],
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://admirerx.com'),
   openGraph: {
-    title: 'AdmirerX – Unlock Efficiency with Customer Support, IT & Data Entry',
-    description: 'AdmirerX helps businesses scale with Customer Support, IT, and Data Entry services powered by efficiency and technology.',
+    title: 'AdmirerX — Premium BPO for the Modern Enterprise',
+    description: 'Scalable expertise, global focus, enterprise-grade reliability. Comprehensive BPO solutions designed to help your business scale efficiently while maintaining the highest standards of quality and security.',
     type: 'website',
     url: process.env.NEXT_PUBLIC_SITE_URL || 'https://admirerx.com',
     siteName: 'AdmirerX',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AdmirerX – Unlock Efficiency with Customer Support, IT & Data Entry',
-    description: 'AdmirerX helps businesses scale with Customer Support, IT, and Data Entry services powered by efficiency and technology.',
+    title: 'AdmirerX — Premium BPO for the Modern Enterprise',
+    description: 'Scalable expertise, global focus, enterprise-grade reliability. Comprehensive BPO solutions designed to help your business scale efficiently while maintaining the highest standards of quality and security.',
   },
   icons: {
     icon: '/favicon.ico',

@@ -5,22 +5,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 11, 18, 32;
+  --background-end-rgb: 17, 24, 39;
 }
 
 body {
-  color: #c8d2e6;
-  background: linear-gradient(180deg, #0c1424 0%, #101b33 100%);
+  color: #9CA3AF;
+  background: #0B1220;
   font-family: 'Inter', sans-serif;
 }
 
@@ -72,7 +64,11 @@ html {
 }
 
 .bg-deep {
-  background-image: linear-gradient(to bottom, #0c1424, #101b33);
+  background: #0B1220;
+}
+
+.bg-secondary {
+  background: #111827;
 }
 
 .bg-purple-gradient {
@@ -94,12 +90,12 @@ html {
   font-weight: 700;
   font-size: 2.25rem; /* text-4xl */
   line-height: 2.5rem;
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 .text-subheading {
   font-size: 1.125rem; /* text-lg */
-  color: #d1d5db; /* gray-300 */
+  color: #9CA3AF; /* gray-400 */
 }
 
 .btn-gradient {
@@ -195,15 +191,15 @@ html {
 
 .service-card {
   transition: all 0.3s ease;
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  background: #111827;
   border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 1rem;
 }
 
 .service-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   border-color: #3b82f6;
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
 }
 
 .stat-card {
@@ -217,12 +213,16 @@ html {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background: #3B82F6;
+  color: #FFFFFF;
   transition: all 0.3s ease;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  background: #2563eb;
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
 }
@@ -242,7 +242,7 @@ html {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+  background: linear-gradient(135deg, #3B82F6 0%, #60a5fa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -260,5 +260,5 @@ html {
   left: 0;
   width: 50px;
   height: 3px;
-  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+  background: linear-gradient(135deg, #3B82F6 0%, #60a5fa 100%);
 }

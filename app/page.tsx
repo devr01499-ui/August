@@ -2,25 +2,25 @@
 
 import TopBar from '@/components/TopBar'
 import Hero from '@/components/Hero'
-import ServicesGrid from '@/components/ServicesGrid'
+import FeatureTiles from '@/components/FeatureTiles'
 import WhyChoose from '@/components/WhyChoose'
-import Footer from '@/components/Footer'
+import ServicesGrid from '@/components/ServicesGrid'
+import HowWeWork from '@/components/HowWeWork'
+import PartnerSection from '@/components/PartnerSection'
 import ContactSection from '@/components/ContactSection'
+import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-deep">
       <TopBar />
       <Hero />
-      <div id="services">
-        <ServicesGrid />
-      </div>
-      <div id="about">
-        <WhyChoose />
-      </div>
-      <div id="contact">
-        <ContactSection />
-      </div>
+      <FeatureTiles />
+      <WhyChoose />
+      <ServicesGrid />
+      <HowWeWork />
+      <PartnerSection />
+      <ContactSection />
       <Footer />
     </main>
   )
