@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { sendContactForm } from '@/lib/emailjs'
+// Google Form integration: Remove EmailJS
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -57,49 +57,58 @@ export default function ContactSection() {
     }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
+  const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfQw.../formResponse"; // Replace with your Google Form's formResponse URL
+  // Replace entry.xxxxxxxx with your Google Form field entry IDs
+  const GOOGLE_FORM_FIELDS = {
+    name: "entry.123456789", // Name field
+    email: "entry.987654321", // Email field
+    phone: "entry.111111111", // Phone field
+    service: "entry.222222222", // Service field
+    message: "entry.333333333" // Message field
+  };
 
-    setIsSubmitting(true)
-    setSubmitStatus('idle')
-    setSubmitMessage('')
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setSubmitMessage('');
+
+    // Build form data for Google Form
+    const data = new FormData();
+    data.append(GOOGLE_FORM_FIELDS.name, formData.name);
+    data.append(GOOGLE_FORM_FIELDS.email, formData.email);
+    data.append(GOOGLE_FORM_FIELDS.phone, formData.phone);
+    data.append(GOOGLE_FORM_FIELDS.service, formData.service);
+    data.append(GOOGLE_FORM_FIELDS.message, formData.message);
 
     try {
-      const result = await sendContactForm({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        service: formData.service,
-        message: formData.message,
-      })
-
-      if (result.success) {
-        setSubmitStatus('success')
-        setSubmitMessage('✅ Message sent successfully!')
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          service: 'Customer Support Solutions',
-          message: '',
-          appointmentDate: '',
-          appointmentTime: '',
-          allowStorage: false
-        })
-        if (formRef.current) {
-          formRef.current.reset()
-        }
-      } else {
-        setSubmitStatus('error')
-        setSubmitMessage('❌ Something went wrong. Please try again.')
+      const response = await fetch(GOOGLE_FORM_ACTION_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: data
+      });
+      // Google Forms always returns opaque response with no error info
+      setSubmitStatus('success');
+      setSubmitMessage('✅ Message sent successfully!');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service: 'Customer Support Solutions',
+        message: '',
+        appointmentDate: '',
+        appointmentTime: '',
+        allowStorage: false
+      });
+      if (formRef.current) {
+        formRef.current.reset();
       }
     } catch (error) {
-      console.error('Form submission error:', error)
-      setSubmitStatus('error')
-      setSubmitMessage('❌ Something went wrong. Please try again.')
+      console.error('Form submission error:', error);
+      setSubmitStatus('error');
+      setSubmitMessage('❌ Something went wrong. Please try again.');
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
   }
 
