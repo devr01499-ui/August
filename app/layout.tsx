@@ -4,12 +4,11 @@ import './globals.css'
 import PerformanceMonitor from '@/components/PerformanceMonitor'
 import PerformanceOptimizer from '@/components/PerformanceOptimizer'
 
-// Font optimization with preloading
+// Font optimization
 const inter = Inter({ 
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
-  preload: true,
 })
 
 const poppins = Poppins({ 
@@ -17,7 +16,6 @@ const poppins = Poppins({
   weight: ['300', '400', '500', '600', '700', '800', '900'],
   display: 'swap',
   variable: '--font-poppins',
-  preload: true,
 })
 
 export const metadata: Metadata = {

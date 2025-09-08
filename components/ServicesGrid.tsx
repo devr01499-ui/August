@@ -8,42 +8,42 @@ export default function ServicesGrid() {
     {
       title: 'HR & Recruitment',
       description: 'Full-cycle recruitment services from talent sourcing to onboarding, powered by advanced assessment tools and industry expertise.',
-      image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      image: '/images/optimized/hr-consultancy.jpg',
       features: ['End-to-end recruitment process', 'Advanced candidate screening', 'Compliance & legal expertise', 'Onboarding excellence'],
       id: 'hr-recruitment'
     },
     {
       title: 'Customer Support',
       description: '24/7 omnichannel customer support with multilingual capabilities, ensuring exceptional customer experiences across all touchpoints.',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      image: '/images/optimized/customer-support.jpg',
       features: ['Multi-channel support (voice, email, chat)', 'Brand-aligned communication', 'Custom SLA management', 'Quality monitoring & reporting'],
       id: 'customer-support'
     },
     {
       title: 'Lead Generation',
       description: 'Strategic lead generation and inside sales services that deliver qualified prospects through compliant, data-driven outreach campaigns.',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      image: '/images/optimized/lead-generation.jpg',
       features: ['Smart lead qualification', 'Compliance-first approach', 'Advanced analytics & reporting', 'Scalable campaign management'],
       id: 'lead-generation'
     },
     {
       title: 'Technical Helpdesk',
       description: 'Expert technical support and helpdesk services with rapid response times and comprehensive issue resolution capabilities.',
-      image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      image: '/images/optimized/tech-support.jpg',
       features: ['Multi-tier technical support', 'SLA-driven resolution times', 'Remote diagnostics & troubleshooting', 'Knowledge base management'],
       id: 'tech-helpdesk'
     },
     {
       title: 'Data Processing & Back Office',
       description: 'Comprehensive data processing and back-office operations that ensure accuracy, efficiency, and actionable business insights.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      image: '/images/optimized/data-processing.jpg',
       features: ['Data entry & validation', 'Advanced analytics & reporting', 'Process automation', 'Insight generation & visualization'],
       id: 'data-processing'
     },
     {
       title: 'Custom BPO Solutions',
       description: 'Tailored BPO solutions designed specifically for your business needs, with flexible workflows and scalable team structures.',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      image: '/images/optimized/it-solutions.jpg',
       features: ['Bespoke workflow design', 'Scalable team allocation', 'Custom system integrations', 'Performance optimization'],
       id: 'custom-solutions'
     }
