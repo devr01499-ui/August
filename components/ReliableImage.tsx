@@ -22,7 +22,7 @@ export default function ReliableImage({
   className = '',
   priority = false,
   sizes,
-  fallbackSrc = '/images/placeholder.jpg'
+  fallbackSrc = '/images/optimized/placeholder.jpg'
 }: ReliableImageProps) {
   const [imgSrc, setImgSrc] = useState(src)
   const [isLoading, setIsLoading] = useState(true)

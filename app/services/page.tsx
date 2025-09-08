@@ -69,7 +69,7 @@ export default function ServicesPage() {
         'Salary benchmarking and negotiation support',
         'Employee documentation and record keeping'
       ],
-      image: '/images/hr-consultancy.jpg',
+      image: '/images/optimized/hr-consultancy.jpg',
       color: 'text-electric-500',
       bgColor: 'bg-electric-500/10',
       onCtaClick: () => setSelectedService('hr-recruitment')
@@ -91,7 +91,7 @@ export default function ServicesPage() {
         'Ticket management and resolution tracking',
         'Social media customer service support'
       ],
-      image: '/images/customer-support.jpg',
+      image: '/images/optimized/customer-support.jpg',
       color: 'text-coral-500',
       bgColor: 'bg-coral-500/10',
       onCtaClick: () => setSelectedService('customer-support')
@@ -113,7 +113,7 @@ export default function ServicesPage() {
         'Cold calling and outreach programs',
         'Lead nurturing and follow-up sequences'
       ],
-      image: '/images/lead-generation.jpg',
+      image: '/images/optimized/lead-generation.jpg',
       color: 'text-electric-500',
       bgColor: 'bg-electric-500/10',
       onCtaClick: () => setSelectedService('lead-generation')
@@ -135,7 +135,7 @@ export default function ServicesPage() {
         'Data backup and recovery services',
         'IT infrastructure monitoring and maintenance'
       ],
-      image: '/images/tech-support.jpg',
+      image: '/images/optimized/tech-support.jpg',
       color: 'text-coral-500',
       bgColor: 'bg-coral-500/10',
       onCtaClick: () => setSelectedService('tech-helpdesk')
@@ -157,7 +157,7 @@ export default function ServicesPage() {
         'Financial data processing and reconciliation',
         'Inventory management and tracking'
       ],
-      image: '/images/data-processing.jpg',
+      image: '/images/optimized/data-processing.jpg',
       color: 'text-electric-500',
       bgColor: 'bg-electric-500/10',
       onCtaClick: () => setSelectedService('data-processing')
@@ -179,7 +179,7 @@ export default function ServicesPage() {
         'Technology stack customization',
         'Ongoing process improvement and innovation'
       ],
-      image: '/images/it-solutions.jpg',
+      image: '/images/optimized/it-solutions.jpg',
       color: 'text-coral-500',
       bgColor: 'bg-coral-500/10',
       onCtaClick: () => setSelectedService('custom-bpo')

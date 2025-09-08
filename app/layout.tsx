@@ -1,53 +1,62 @@
 import type { Metadata } from 'next'
 import { Inter, Poppins } from 'next/font/google'
 import './globals.css'
+import PerformanceMonitor from '@/components/PerformanceMonitor'
+import PerformanceOptimizer from '@/components/PerformanceOptimizer'
 
+// Font optimization with preloading
 const inter = Inter({ 
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-inter',
   display: 'swap',
+  variable: '--font-inter',
   preload: true,
 })
 
 const poppins = Poppins({ 
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
-  variable: '--font-poppins',
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
   display: 'swap',
+  variable: '--font-poppins',
   preload: true,
 })
 
 export const metadata: Metadata = {
-  title: 'AdmirerX Private Limited — Engineering Digital Growth with Precision & Vision',
-  description: 'Innovative solutions, seamless partnerships, and transformative experiences for clients and talent. Premium BPO services that drive digital transformation and business growth.',
-  keywords: 'AdmirerX, BPO, Business Process Outsourcing, Customer Support, Data Processing, Lead Generation, Technical Support, HR Recruitment, Digital Transformation, Enterprise Solutions, Partnership',
+  title: 'AdmirerX Private Limited - We Admire Your Dreams',
+  description: 'Premium BPO solutions delivering efficiency, security, and excellence. HR & Recruitment, Customer Support, Lead Generation, Technical Helpdesk, Data Processing, and Custom BPO Solutions.',
+  keywords: 'BPO, Business Process Outsourcing, HR Recruitment, Customer Support, Lead Generation, Technical Helpdesk, Data Processing, Custom Solutions, AdmirerX',
   authors: [{ name: 'AdmirerX Private Limited' }],
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://admirerx.com'),
+  creator: 'AdmirerX Private Limited',
+  publisher: 'AdmirerX Private Limited',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://august-three.vercel.app'),
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: 'AdmirerX Private Limited — Engineering Digital Growth with Precision & Vision',
-    description: 'Innovative solutions, seamless partnerships, and transformative experiences for clients and talent. Premium BPO services that drive digital transformation and business growth.',
-    type: 'website',
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://admirerx.com',
-    siteName: 'AdmirerX',
+    title: 'AdmirerX Private Limited - We Admire Your Dreams',
+    description: 'Premium BPO solutions delivering efficiency, security, and excellence.',
+    url: 'https://august-three.vercel.app',
+    siteName: 'AdmirerX Private Limited',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/images/hero.jpg',
         width: 1200,
         height: 630,
-        alt: 'AdmirerX Private Limited',
+        alt: 'AdmirerX Business Solutions',
       },
     ],
+    locale: 'en_US',
+    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AdmirerX Private Limited — Engineering Digital Growth with Precision & Vision',
-    description: 'Innovative solutions, seamless partnerships, and transformative experiences for clients and talent.',
-    images: ['/og-image.jpg'],
-  },
-  icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    title: 'AdmirerX Private Limited - We Admire Your Dreams',
+    description: 'Premium BPO solutions delivering efficiency, security, and excellence.',
+    images: ['/images/hero.jpg'],
   },
   robots: {
     index: true,
@@ -60,6 +69,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  verification: {
+    google: 'your-google-verification-code',
+  },
 }
 
 export default function RootLayout({
@@ -70,14 +82,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta name="theme-color" content="#0A1B3C" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        
         {/* Preload critical resources */}
-        <link rel="preload" href="/fonts/poppins-variable.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/images/hero.jpg" as="image" />
         
         {/* DNS prefetch for external resources */}
@@ -88,17 +93,33 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
-        {/* Critical CSS inline */}
+        {/* Critical CSS inlined */}
         <style dangerouslySetInnerHTML={{
           __html: `
-            .gpu-accelerated { transform: translate3d(0,0,0); will-change: transform, opacity; }
-            .animate-on-scroll { opacity: 0; transform: translate3d(0,30px,0); }
-            .animate-on-scroll.visible { opacity: 1; transform: translate3d(0,0,0); }
+            /* Critical CSS for above-the-fold content */
+            body { margin: 0; font-family: var(--font-inter), system-ui, sans-serif; }
+            .font-heading { font-family: var(--font-poppins), system-ui, sans-serif; }
+            .bg-navy-900 { background-color: #0A2540; }
+            .text-white { color: #ffffff; }
+            .text-electric-500 { color: #0061FF; }
+            .text-coral-500 { color: #FF4B4B; }
+            .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
+            .from-electric-500 { --tw-gradient-from: #0061FF; }
+            .to-coral-500 { --tw-gradient-to: #FF4B4B; }
+            .animate-float { animation: float 6s ease-in-out infinite; }
+            @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+            .gpu-accelerated { transform: translateZ(0); will-change: transform; }
+            .critical-animate { animation: criticalFadeIn 0.6s ease-out forwards; }
+            .critical-slide { animation: criticalSlideUp 0.8s ease-out forwards; }
+            @keyframes criticalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes criticalSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
           `
         }} />
       </head>
       <body className={`${inter.className} antialiased`}>
+        <PerformanceOptimizer />
         {children}
+        <PerformanceMonitor />
       </body>
     </html>
   )

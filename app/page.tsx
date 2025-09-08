@@ -116,7 +116,7 @@ export default function Home() {
         'Onboarding excellence',
         'Talent management'
       ],
-      image: '/images/hr-consultancy.jpg',
+      image: '/images/optimized/hr-consultancy.jpg',
       color: 'text-electric-500',
       bgColor: 'bg-electric-500/10'
     },
@@ -132,7 +132,7 @@ export default function Home() {
         'Custom escalation workflows',
         'Quality assurance monitoring'
       ],
-      image: '/images/customer-support.jpg',
+      image: '/images/optimized/customer-support.jpg',
       color: 'text-coral-500',
       bgColor: 'bg-coral-500/10'
     },
@@ -148,7 +148,7 @@ export default function Home() {
         'Lead scoring algorithms',
         'Conversion tracking'
       ],
-      image: '/images/lead-generation.jpg',
+      image: '/images/optimized/lead-generation.jpg',
       color: 'text-electric-500',
       bgColor: 'bg-electric-500/10'
     },
@@ -164,7 +164,7 @@ export default function Home() {
         'Knowledge base management',
         'Performance monitoring'
       ],
-      image: '/images/tech-support.jpg',
+      image: '/images/optimized/tech-support.jpg',
       color: 'text-coral-500',
       bgColor: 'bg-coral-500/10'
     },
@@ -180,7 +180,7 @@ export default function Home() {
         'Custom reporting tools',
         'Secure data handling'
       ],
-      image: '/images/data-processing.jpg',
+      image: '/images/optimized/data-processing.jpg',
       color: 'text-electric-500',
       bgColor: 'bg-electric-500/10'
     },
@@ -196,7 +196,7 @@ export default function Home() {
         'Performance optimization',
         'Dedicated support'
       ],
-      image: '/images/it-solutions.jpg',
+      image: '/images/optimized/it-solutions.jpg',
       color: 'text-coral-500',
       bgColor: 'bg-coral-500/10'
     }
