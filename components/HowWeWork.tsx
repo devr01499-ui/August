@@ -6,27 +6,31 @@ export default function HowWeWork() {
   const steps = [
     {
       step: '1',
-      title: 'Understand',
-      description: 'We analyze your business needs and challenges',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+      title: 'Assess',
+      description: 'We analyze your business needs, challenges, and opportunities to understand your unique requirements.',
+      icon: '🔍',
+      color: 'from-blue-500 to-blue-600'
     },
     {
       step: '2',
-      title: 'Co-Design',
-      description: 'Collaborate to create tailored solutions',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+      title: 'Onboard',
+      description: 'Seamless integration with your existing systems and processes, ensuring minimal disruption.',
+      icon: '🚀',
+      color: 'from-green-500 to-green-600'
     },
     {
       step: '3',
-      title: 'Deploy',
-      description: 'Implement with minimal disruption to your operations',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+      title: 'Scale',
+      description: 'Rapidly scale your operations with our proven methodologies and dedicated support teams.',
+      icon: '📈',
+      color: 'from-purple-500 to-purple-600'
     },
     {
       step: '4',
-      title: 'Improve',
-      description: 'Continuously optimize and scale your success',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+      title: 'Optimize',
+      description: 'Continuous improvement and optimization to maximize efficiency and drive sustainable growth.',
+      icon: '⚡',
+      color: 'from-orange-500 to-orange-600'
     }
   ]
 
@@ -43,36 +47,50 @@ export default function HowWeWork() {
           </p>
         </div>
 
-        {/* Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step, index) => (
-            <motion.div
-              key={step.step}
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              {/* Step Image */}
-              <div className="relative mb-6">
-                <div className="w-24 h-24 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 relative z-10">
-                  <span className="text-2xl font-bold text-white">{step.step}</span>
+        {/* Animated Timeline */}
+        <div className="relative">
+          {/* Timeline Line */}
+          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-green-500 via-purple-500 to-orange-500 transform -translate-y-1/2 rounded-full"></div>
+          
+          {/* Steps */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {steps.map((step, index) => (
+              <motion.div
+                key={step.step}
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                className="relative text-center group"
+              >
+                {/* Step Circle */}
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  className={`w-20 h-20 bg-gradient-to-r ${step.color} rounded-full flex items-center justify-center mx-auto mb-6 relative z-10 shadow-lg`}
+                >
+                  <span className="text-3xl">{step.icon}</span>
+                </motion.div>
+                
+                {/* Step Number */}
+                <div className="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center text-sm font-bold text-gray-800">
+                  {step.step}
                 </div>
-                <div className="w-32 h-32 mx-auto bg-secondary rounded-2xl overflow-hidden border border-gray-600">
-                  <img
-                    src={step.image}
-                    alt={`Step ${step.step}: ${step.title}`}
-                    className="w-full h-full object-cover"
-                  />
+                
+                {/* Step Content */}
+                <div className="bg-secondary rounded-2xl p-6 border border-gray-600 group-hover:border-blue-500 transition-all duration-300">
+                  <h3 className="text-xl font-semibold text-white mb-3">{step.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{step.description}</p>
                 </div>
-              </div>
-              
-              {/* Step Content */}
-              <h3 className="text-xl font-semibold text-white mb-2">{step.title}</h3>
-              <p className="text-gray-400">{step.description}</p>
-            </motion.div>
-          ))}
+                
+                {/* Animated Pulse Effect */}
+                <motion.div
+                  className={`absolute inset-0 bg-gradient-to-r ${step.color} rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300`}
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

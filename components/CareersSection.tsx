@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { sendContactForm } from '@/lib/emailjs'
+// Removed EmailJS import - using our backend instead
 
 export default function CareersSection() {
   const [formData, setFormData] = useState({
@@ -16,30 +16,36 @@ export default function CareersSection() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [submitMessage, setSubmitMessage] = useState<string>('')
 
-  const whyWorkWithUs = [
+  const joinOurTeam = [
     {
       title: 'Career Growth',
-      description: 'Clear advancement paths and opportunities for professional development'
+      description: 'Clear advancement paths and opportunities for professional development',
+      image: '/images/hero.jpg'
     },
     {
       title: 'Training & Development',
-      description: 'Comprehensive training programs and skill enhancement opportunities'
+      description: 'Comprehensive training programs and skill enhancement opportunities',
+      image: '/images/hero.jpg'
     },
     {
       title: 'Inclusive Culture',
-      description: 'Diverse, inclusive workplace that values every team member'
+      description: 'Diverse, inclusive workplace that values every team member',
+      image: '/images/hero.jpg'
     },
     {
       title: 'Performance Rewards',
-      description: 'Competitive compensation and performance-based incentives'
+      description: 'Competitive compensation and performance-based incentives',
+      image: '/images/hero.jpg'
     },
     {
       title: 'Comprehensive Benefits',
-      description: 'Health insurance, retirement plans, and other employee benefits'
+      description: 'Health insurance, retirement plans, and other employee benefits',
+      image: '/images/hero.jpg'
     },
     {
       title: 'Work-Life Balance',
-      description: 'Flexible schedules and policies that support work-life balance'
+      description: 'Flexible schedules and policies that support work-life balance',
+      image: '/images/hero.jpg'
     }
   ]
 
@@ -102,17 +108,30 @@ export default function CareersSection() {
     setSubmitMessage('')
 
     try {
-      const result = await sendContactForm({
-        name: formData.fullName,
-        email: formData.email,
-        phone: formData.phone,
-        service: `Job Application - ${formData.role}`,
-        message: formData.coverLetter,
+      // Create FormData for file upload
+      const formDataToSend = new FormData()
+      formDataToSend.append('fullName', formData.fullName)
+      formDataToSend.append('email', formData.email)
+      formDataToSend.append('phone', formData.phone)
+      formDataToSend.append('role', formData.role)
+      formDataToSend.append('coverLetter', formData.coverLetter)
+      
+      // Add CV file if selected
+      const cvFileInput = document.getElementById('cvFile') as HTMLInputElement
+      if (cvFileInput?.files?.[0]) {
+        formDataToSend.append('cvFile', cvFileInput.files[0])
+      }
+
+      const response = await fetch('/api/careers', {
+        method: 'POST',
+        body: formDataToSend
       })
+
+      const result = await response.json()
 
       if (result.success) {
         setSubmitStatus('success')
-        setSubmitMessage('✅ Application submitted successfully!')
+        setSubmitMessage(`✅ Application submitted successfully! Resume ID: ${result.resumeId}. We'll review your application and get back to you soon.`)
         setFormData({
           fullName: '',
           email: '',
@@ -120,14 +139,18 @@ export default function CareersSection() {
           role: '',
           coverLetter: ''
         })
+        // Reset file input
+        if (cvFileInput) {
+          cvFileInput.value = ''
+        }
       } else {
         setSubmitStatus('error')
-        setSubmitMessage('❌ Something went wrong. Please try again.')
+        setSubmitMessage('❌ ' + (result.error || 'Something went wrong. Please try again.'))
       }
     } catch (error) {
       console.error('Form submission error:', error)
       setSubmitStatus('error')
-      setSubmitMessage('❌ Something went wrong. Please try again.')
+      setSubmitMessage('❌ Network error. Please check your connection and try again.')
     } finally {
       setIsSubmitting(false)
     }
@@ -148,9 +171,9 @@ export default function CareersSection() {
 
         {/* Why Work With Us */}
         <div className="mb-20">
-          <h3 className="text-3xl font-bold text-white text-center mb-12">Why Work With Us</h3>
+          <h3 className="text-3xl font-bold text-white text-center mb-12">Join Our Team</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {whyWorkWithUs.map((benefit, index) => (
+            {joinOurTeam.map((benefit, index) => (
               <motion.div
                 key={benefit.title}
                 initial={{ y: 50, opacity: 0 }}
@@ -275,15 +298,16 @@ export default function CareersSection() {
             </div>
 
             <div>
-              <label htmlFor="cv" className="block text-sm font-medium text-white mb-2">
-                Upload CV
+              <label htmlFor="cvFile" className="block text-sm font-medium text-white mb-2">
+                Upload CV *
               </label>
               <input
                 type="file"
-                id="cv"
-                name="cv"
+                id="cvFile"
+                name="cvFile"
                 onChange={handleFileUpload}
                 accept=".pdf,.doc,.docx"
+                required
                 className="w-full px-4 py-3 border border-gray-600 rounded-lg bg-deep text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
               />
               <p className="text-xs text-gray-400 mt-1">Accepted formats: PDF, DOC, DOCX (Max 10MB)</p>

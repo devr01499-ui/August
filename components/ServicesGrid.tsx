@@ -58,7 +58,7 @@ export default function ServicesGrid() {
             Our Services
           </h2>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto">
-            Comprehensive BPO solutions designed to help your business scale efficiently while maintaining the highest standards of quality and security.
+            Smart, scalable BPO solutions that power your growth delivering efficiency, security, and excellence at every step.
           </p>
         </div>
 
@@ -101,14 +101,12 @@ export default function ServicesGrid() {
               </ul>
 
               {/* CTA Button */}
-              <button
-                onClick={() => {
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-                }}
-                className="w-full btn-primary text-white py-3 px-4 rounded-lg text-sm font-medium transition-colors duration-200"
+              <a
+                href={`/contact?service=${encodeURIComponent(service.title)}`}
+                className="w-full btn-primary text-white py-3 px-4 rounded-lg text-sm font-medium transition-colors duration-200 text-center block"
               >
                 Book Appointment
-              </button>
+              </a>
             </motion.div>
           ))}
         </div>

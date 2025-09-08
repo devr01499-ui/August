@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { sendContactForm } from '@/lib/emailjs'
+// Removed EmailJS import - using our backend instead
 
 export default function PartnerSection() {
   const [formData, setFormData] = useState({
@@ -72,17 +72,26 @@ export default function PartnerSection() {
     setSubmitMessage('')
 
     try {
-      const result = await sendContactForm({
-        name: formData.fullName,
-        email: formData.email,
-        company: formData.companyName,
-        service: formData.serviceInterest,
-        message: formData.needs,
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.fullName,
+          email: formData.email,
+          phone: '', // Partner form doesn't have phone
+          message: `Company: ${formData.companyName}\nService Interest: ${formData.serviceInterest}\nNeeds: ${formData.needs}`,
+          service: 'Partnership Inquiry',
+          source: 'partnership'
+        })
       })
+
+      const result = await response.json()
 
       if (result.success) {
         setSubmitStatus('success')
-        setSubmitMessage('✅ Partnership inquiry submitted successfully!')
+        setSubmitMessage('✅ Partnership inquiry submitted successfully! We\'ll get back to you soon.')
         setFormData({
           fullName: '',
           email: '',
@@ -92,12 +101,12 @@ export default function PartnerSection() {
         })
       } else {
         setSubmitStatus('error')
-        setSubmitMessage('❌ Something went wrong. Please try again.')
+        setSubmitMessage('❌ ' + (result.message || 'Something went wrong. Please try again.'))
       }
     } catch (error) {
       console.error('Form submission error:', error)
       setSubmitStatus('error')
-      setSubmitMessage('❌ Something went wrong. Please try again.')
+      setSubmitMessage('❌ Network error. Please check your connection and try again.')
     } finally {
       setIsSubmitting(false)
     }
@@ -168,18 +177,49 @@ export default function PartnerSection() {
             viewport={{ once: true }}
             className="bg-secondary rounded-2xl p-12 border border-gray-600"
           >
-            <h3 className="text-3xl font-bold text-white mb-6">Ready to Partner With Us?</h3>
+            <h3 className="text-3xl font-bold text-white mb-6">Discuss Partnership</h3>
             <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
-              Let's discuss how we can help transform your business operations and drive growth together.
+              Build trust and growth-readiness with our strategic partnership approach. We offer:
             </p>
-            <button
-              onClick={() => {
-                window.location.href = '/partner'
-              }}
-              className="btn-primary text-white py-4 px-8 rounded-lg text-lg font-semibold transition-all duration-200 hover:scale-105"
+            
+            {/* Benefits List */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">📈</span>
+                </div>
+                <h4 className="text-lg font-semibold text-white mb-2">Scale</h4>
+                <p className="text-gray-400 text-sm">Leverage our infrastructure to scale your operations</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🤝</span>
+                </div>
+                <h4 className="text-lg font-semibold text-white mb-2">Co-invest</h4>
+                <p className="text-gray-400 text-sm">Shared investment in growth initiatives</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🚀</span>
+                </div>
+                <h4 className="text-lg font-semibold text-white mb-2">Growth Partnership</h4>
+                <p className="text-gray-400 text-sm">Long-term strategic partnership for mutual success</p>
+              </div>
+            </div>
+
+            {/* Testimonial Quote */}
+            <blockquote className="text-lg text-gray-300 italic mb-8 max-w-3xl mx-auto">
+              "Partnering with AdmirerX has been transformative for our business. Their expertise and dedication have helped us scale our operations while maintaining the highest quality standards."
+            </blockquote>
+            <p className="text-white font-semibold mb-2">Sarah Johnson</p>
+            <p className="text-gray-400 text-sm mb-8">CEO, TechCorp Solutions</p>
+
+            <a
+              href="/partner"
+              className="btn-primary text-white py-4 px-8 rounded-lg text-lg font-semibold transition-all duration-200 hover:scale-105 inline-block"
             >
-              Discuss Partnership
-            </button>
+              Enquire Now
+            </a>
           </motion.div>
         </div>
 

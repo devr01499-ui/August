@@ -14,6 +14,12 @@ export default function Hero() {
                 Transform Your Business with{' '}
                 <span className="text-gradient">Premium BPO Solutions</span>
               </h1>
+              <p className="mt-4 text-lg text-blue-300 font-medium">
+                We Admire Your Dreams
+              </p>
+              <p className="mt-2 text-lg text-blue-200 font-medium">
+                Be empowered. Be supported. Be AdmirerX
+              </p>
               <p className="mt-6 text-xl text-gray-400 leading-relaxed">
                 Streamline operations, enhance customer experience, and drive growth with our comprehensive BPO services. From customer support to data processing, we deliver excellence in every interaction.
               </p>
@@ -21,22 +27,18 @@ export default function Hero() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <button
-                onClick={() => {
-                  document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })
-                }}
-                className="btn-primary text-white py-3 px-8 rounded-lg text-lg font-semibold transition-all duration-200 hover:scale-105"
+              <a
+                href="/services"
+                className="btn-primary text-white py-3 px-8 rounded-lg text-lg font-semibold transition-all duration-200 hover:scale-105 text-center"
               >
                 Explore Services
-              </button>
-              <button
-                onClick={() => {
-                  document.getElementById('partner')?.scrollIntoView({ behavior: 'smooth' })
-                }}
-                className="btn-outline text-white py-3 px-8 rounded-lg text-lg font-semibold transition-all duration-200 hover:scale-105"
+              </a>
+              <a
+                href="/partner"
+                className="btn-outline text-white py-3 px-8 rounded-lg text-lg font-semibold transition-all duration-200 hover:scale-105 text-center"
               >
                 Partner With Us
-              </button>
+              </a>
             </div>
           </div>
 

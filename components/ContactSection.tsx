@@ -11,9 +11,7 @@ export default function ContactSection() {
     phone: '',
     service: 'Customer Support',
     message: '',
-    appointmentDate: '',
-    appointmentTime: '',
-    allowStorage: false
+    source: 'contact' // Add source field for backend
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
@@ -57,56 +55,54 @@ export default function ContactSection() {
     }))
   }
 
-  const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfQw.../formResponse"; // Replace with your Google Form's formResponse URL
-  // Replace entry.xxxxxxxx with your Google Form field entry IDs
-  const GOOGLE_FORM_FIELDS = {
-    name: "entry.123456789", // Name field
-    email: "entry.987654321", // Email field
-    phone: "entry.111111111", // Phone field
-    service: "entry.222222222", // Service field
-    message: "entry.333333333" // Message field
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
     setSubmitMessage('');
 
-    // Build form data for Google Form
-    const data = new FormData();
-    data.append(GOOGLE_FORM_FIELDS.name, formData.name);
-    data.append(GOOGLE_FORM_FIELDS.email, formData.email);
-    data.append(GOOGLE_FORM_FIELDS.phone, formData.phone);
-    data.append(GOOGLE_FORM_FIELDS.service, formData.service);
-    data.append(GOOGLE_FORM_FIELDS.message, formData.message);
+    // Prepare data for our backend
+    const submitData = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      message: `${formData.service}: ${formData.message}`, // Include service in message
+      source: formData.source
+    };
 
     try {
-      const response = await fetch(GOOGLE_FORM_ACTION_URL, {
-        method: "POST",
-        mode: "no-cors",
-        body: data
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submitData)
       });
-      // Google Forms always returns opaque response with no error info
-      setSubmitStatus('success');
-      setSubmitMessage('✅ Message sent successfully!');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        service: 'Customer Support Solutions',
-        message: '',
-        appointmentDate: '',
-        appointmentTime: '',
-        allowStorage: false
-      });
-      if (formRef.current) {
-        formRef.current.reset();
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitStatus('success');
+        setSubmitMessage('✅ Message sent successfully! We\'ll get back to you soon.');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: 'Customer Support',
+          message: '',
+          source: 'contact'
+        });
+        if (formRef.current) {
+          formRef.current.reset();
+        }
+      } else {
+        setSubmitStatus('error');
+        setSubmitMessage('❌ ' + (result.error || 'Something went wrong. Please try again.'));
       }
     } catch (error) {
       console.error('Form submission error:', error);
       setSubmitStatus('error');
-      setSubmitMessage('❌ Something went wrong. Please try again.');
+      setSubmitMessage('❌ Network error. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
     }

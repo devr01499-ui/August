@@ -1,272 +1,156 @@
-# ⚙️ Development Setup
+# AdmirerX Contact Backend
 
-This project is built and tested with **Node 18 LTS**.  
-Before running locally:
+A production-ready Node.js Express backend for handling contact forms with Telegram notifications and Google Sheets integration.
 
+## Features
+
+- 📧 **Contact Form Processing** - Handles contact, appointment, and partnership inquiries
+- 🤖 **Telegram Bot Integration** - Sends formatted notifications to your Telegram bot
+- 📊 **Google Sheets Integration** - Automatically appends form data to a Google Sheet
+- 🛡️ **Input Validation** - Validates all form inputs and sources
+- 🚀 **Production Ready** - Error handling, logging, and health checks
+- 🎨 **Beautiful Sample Form** - Responsive HTML form for testing
+
+## Quick Start
+
+### 1. Install Dependencies
 ```bash
-# If using nvm:
-nvm install 18.20.3
-nvm use 18.20.3
-
-# If you must use Node 20+:
-export NODE_OPTIONS="--max-old-space-size=4096"
+npm install
 ```
 
----
+### 2. Configure Environment
+```bash
+# Copy the example environment file
+cp env.example .env
 
-# AdmirerX Website
-
-## Setup Requirements
-
-- ⚠️ **Node.js 18.x Required** — This project has been tested only on Node 18. Please install Node 18 via nvm-windows or nvm before running `npm install`.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/devr01499-ui/August)
-
-A modern, responsive single-page business website built with Next.js, React, Tailwind CSS, and Framer Motion. Features a contact form integrated with EmailJS for seamless communication.
-
-## 🚀 Features
-
-- **Modern Design**: Clean, professional corporate style with green accent colors
-- **Fully Responsive**: Optimized for all devices (mobile, tablet, desktop)
-- **Smooth Animations**: Framer Motion animations for enhanced user experience
-- **Contact Form**: EmailJS integration for direct email communication
-- **SEO Optimized**: Meta tags, structured data, and performance optimized
-- **Production Ready**: Deploy-ready with Vercel/Netlify
-
-## 📋 Sections
-
-1. **Top Bar**: ADMIRERX logo with navigation menu
-2. **Hero Section**: Eye-catching hero with call-to-action
-3. **About Section**: Company information with business meeting image
-4. **Services Section**: Three service cards (Customer Support, IT Solutions, Data Entry)
-5. **Contact Form**: EmailJS integrated contact form
-6. **Footer**: Links and company information
-
-## 🛠️ Tech Stack
-
-- **Framework**: Next.js 14 with App Router
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Email Service**: EmailJS
-- **Language**: TypeScript
-- **Deployment**: Vercel/Netlify
-
-## 📦 Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <your-repo-url>
-   cd admirerx-website
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Set up EmailJS** (Required for contact form)
-   - Go to [EmailJS](https://www.emailjs.com/) and create an account
-   - Create a new Email Service (Gmail recommended)
-   - Create an email template (see EmailJS setup below)
-   - Get your Public Key from Account > API Keys
-
-4. **Configure EmailJS**
-   - Update `lib/emailjs-config.ts` with your credentials
-   - Or update the ContactSection component directly
-
-5. **Run the development server**
-   ```bash
-   npm run dev
-   ```
-
-6. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000) (development)
-
-## 📧 EmailJS Setup
-
-### Step 1: Create EmailJS Account
-1. Visit [EmailJS](https://www.emailjs.com/)
-2. Sign up for a free account
-3. Verify your email address
-
-### Step 2: Create Email Service
-1. Go to Email Services
-2. Click "Add New Service"
-3. Choose "Gmail" as service type
-4. Name: `service_admirerx`
-5. Connect your Gmail account (devr01499@gmail.com)
-
-### Step 3: Create Email Template
-1. Go to Email Templates
-2. Click "Create New Template"
-3. Template Name: `template_admirerx_contact`
-4. Use this template content:
-
-```
-Subject: New Contact Form Submission from {{from_name}}
-
-Hello,
-
-You have received a new contact form submission from the ADMIRERX website.
-
-Contact Details:
-- Name: {{from_name}}
-- Email: {{from_email}}
-- Phone: {{from_phone}}
-- Message: {{message}}
-
-Please respond to this inquiry at your earliest convenience.
-
-Best regards,
-ADMIRERX Website
+# Edit .env and add your Telegram chat ID
+TELEGRAM_CHAT_ID=your_telegram_chat_id_here
 ```
 
-### Step 4: Get API Keys
-1. Go to Account > API Keys
-2. Copy your Public Key
+### 3. Set Up Google Sheets
+1. Create a Google Cloud Project
+2. Enable the Google Sheets API
+3. Create a Service Account
+4. Download the service account JSON key
+5. Rename it to `google-credentials.json` and place in the root directory
+6. Share your Google Sheet with the service account email (give Editor access)
 
-### Step 5: Update Configuration
-Update the following files with your EmailJS credentials:
+### 4. Configure Google Sheet
+Create a Google Sheet with these headers in row 1:
+- Timestamp
+- Source
+- Name
+- Email
+- Phone
+- Message
 
-**Option 1: Update lib/emailjs-config.ts**
-```typescript
-export const EMAILJS_CONFIG = {
-  SERVICE_ID: 'your_service_id',
-  TEMPLATE_ID: 'your_template_id',
-  PUBLIC_KEY: 'your_public_key',
-  TO_EMAIL: 'devr01499@gmail.com'
+### 5. Get Your Telegram Chat ID
+1. Start a chat with your bot
+2. Send a message to the bot
+3. Visit: `https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getUpdates`
+4. Find your chat ID in the response
+
+### 6. Run the Server
+```bash
+# Development
+npm run dev
+
+# Production
+npm start
+```
+
+## API Endpoints
+
+### POST /submitContact
+Submit a contact form.
+
+**Request Body:**
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "phone": "+1234567890",
+  "message": "Hello, I'm interested in your services.",
+  "source": "contact"
 }
 ```
 
-**Option 2: Update ContactSection component directly**
-```typescript
-const result = await emailjs.send(
-  'your_service_id',
-  'your_template_id',
-  templateParams,
-  'your_public_key'
-)
-```
+**Sources:**
+- `contact` - General contact form
+- `appointment` - Book appointment
+- `partnership` - Partnership inquiry
 
-## 🚀 Deployment
-
-### Deploy to Vercel (Recommended)
-
-1. **Push to GitHub**
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git push origin main
-   ```
-
-2. **Deploy to Vercel**
-   - Go to [Vercel](https://vercel.com/)
-   - Sign up/Login with GitHub
-   - Click "New Project"
-   - Import your GitHub repository
-   - Vercel will automatically detect Next.js
-   - Click "Deploy"
-
-3. **Custom Domain** (Optional)
-   - In Vercel dashboard, go to Settings > Domains
-   - Add your custom domain
-   - Update DNS settings as instructed
-
-### Deploy to Netlify
-
-1. **Build the project**
-   ```bash
-   npm run build
-   ```
-
-2. **Deploy to Netlify**
-   - Go to [Netlify](https://netlify.com/)
-   - Drag and drop the `.next` folder
-   - Or connect your GitHub repository
-
-## 📱 Mobile Responsiveness
-
-The website is fully responsive and optimized for:
-- Mobile devices (320px+)
-- Tablets (768px+)
-- Desktop (1024px+)
-- Large screens (1440px+)
-
-## 🎨 Customization
-
-### Colors
-Update the primary color scheme in `tailwind.config.js`:
-```javascript
-colors: {
-  primary: {
-    500: '#22c55e', // Main green color
-    600: '#16a34a', // Darker green
-    700: '#15803d', // Even darker green
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Form submitted successfully! We'll get back to you soon.",
+  "data": {
+    "telegram": { /* Telegram API response */ },
+    "sheets": { /* Google Sheets API response */ }
   }
 }
 ```
 
-### Content
-- Update text content in respective component files
-- Replace images with your own (update URLs in components)
-- Modify contact information in Footer and ContactSection
+### GET /health
+Health check endpoint.
 
-### Styling
-- All styles use Tailwind CSS classes
-- Custom styles can be added to `app/globals.css`
-- Component-specific styles are in the respective component files
-
-## 🔧 Development
-
-### Available Scripts
-
-```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run start        # Start production server
-npm run lint         # Run ESLint
+**Response:**
+```json
+{
+  "status": "OK",
+  "timestamp": "2024-01-01T00:00:00.000Z",
+  "services": {
+    "telegram": "configured",
+    "googleSheets": "configured"
+  }
+}
 ```
 
-### Project Structure
+## Sample Form
 
-```
-admirerx-website/
-├── app/                    # Next.js App Router
-│   ├── globals.css        # Global styles
-│   ├── layout.tsx         # Root layout
-│   └── page.tsx           # Main page
-├── components/            # React components
-│   ├── TopBar.tsx        # Navigation bar
-│   ├── HeroSection.tsx   # Hero section
-│   ├── AboutSection.tsx  # About section
-│   ├── ServicesSection.tsx # Services section
-│   ├── ContactSection.tsx # Contact form
-│   └── Footer.tsx        # Footer
-├── lib/                   # Utility functions
-│   └── emailjs-config.ts # EmailJS configuration
-├── public/               # Static assets
-├── tailwind.config.js    # Tailwind configuration
-├── next.config.js        # Next.js configuration
-└── package.json          # Dependencies
-```
+Visit `http://localhost:3001` to see the sample contact form.
 
-## 📞 Support
+## Configuration
 
-For support or questions:
-- Email: devr01499@gmail.com
-- Create an issue in the GitHub repository
+### Environment Variables
+- `PORT` - Server port (default: 3001)
+- `TELEGRAM_CHAT_ID` - Your Telegram chat ID
 
-## 📄 License
+### Google Sheets Setup
+1. The service account JSON file must be named `google-credentials.json`
+2. The service account must have Editor access to your Google Sheet
+3. The sheet should have the correct headers in row 1
 
-This project is licensed under the MIT License.
+### Telegram Bot Setup
+1. Create a bot with @BotFather
+2. Get your bot token
+3. Get your chat ID
+4. Update the `TELEGRAM_CHAT_ID` in your `.env` file
 
-## 🙏 Credits
+## Security Notes
 
-- **Web Design**: B12
-- **Images**: Unsplash
-- **Icons**: Heroicons (via Tailwind CSS)
-- **Fonts**: Inter (Google Fonts)
+- Never expose tokens in client-side code
+- Keep your service account JSON file secure
+- Use environment variables for sensitive configuration
+- The bot token is hardcoded for this example - consider using environment variables in production
 
----
+## Error Handling
 
-**Built with ❤️ for ADMIRERX**
+The server includes comprehensive error handling:
+- Input validation
+- Service availability checks
+- Graceful degradation if one service fails
+- Detailed logging for debugging
+
+## Production Deployment
+
+1. Set up environment variables
+2. Configure your reverse proxy (nginx/Apache)
+3. Set up SSL certificates
+4. Configure process management (PM2)
+5. Set up monitoring and logging
+
+## License
+
+MIT

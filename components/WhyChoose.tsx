@@ -9,8 +9,8 @@ export default function WhyChoose() {
       description: 'Certified professionals with deep industry knowledge and proven track records in delivering exceptional BPO services across diverse sectors.'
     },
     {
-      title: 'Secure Operations',
-      description: 'Bank-level security protocols, GDPR compliance, and enterprise-grade data protection ensuring your business operations remain secure and confidential.'
+      title: 'Secure & Reliable Operations',
+      description: 'Your trust is our priority. AdmirerX protects your business with cutting-edge security and enterprise-class systems, ensuring your data remains safe, private, and always under our care.'
     },
     {
       title: 'Scalable Solutions',
