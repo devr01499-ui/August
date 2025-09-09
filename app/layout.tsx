@@ -1,22 +1,7 @@
 import type { Metadata } from 'next'
-import { Inter, Poppins } from 'next/font/google'
 import './globals.css'
 import PerformanceMonitor from '@/components/PerformanceMonitor'
 import PerformanceOptimizer from '@/components/PerformanceOptimizer'
-
-// Font optimization
-const inter = Inter({ 
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-})
-
-const poppins = Poppins({ 
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
-  display: 'swap',
-  variable: '--font-poppins',
-})
 
 export const metadata: Metadata = {
   title: 'AdmirerX Private Limited - We Admire Your Dreams',
@@ -78,32 +63,28 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
+    <html lang="en">
       <head>
         {/* Preload critical resources */}
         <link rel="preload" href="/images/hero.jpg" as="image" />
         
-        {/* DNS prefetch for external resources */}
-        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+        {/* DNS prefetch for external resources - removed Google Fonts for Turbopack compatibility */}
         
-        {/* Preconnect to external domains */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Preconnect to external domains - removed Google Fonts for Turbopack compatibility */}
         
         {/* Critical CSS inlined */}
         <style dangerouslySetInnerHTML={{
           __html: `
             /* Critical CSS for above-the-fold content */
-            body { margin: 0; font-family: var(--font-inter), system-ui, sans-serif; }
-            .font-heading { font-family: var(--font-poppins), system-ui, sans-serif; }
-            .bg-navy-900 { background-color: #0A2540; }
+            body { margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+            .font-heading { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+            .bg-navy-900 { background-color: #0A1B3C; }
             .text-white { color: #ffffff; }
-            .text-electric-500 { color: #0061FF; }
-            .text-coral-500 { color: #FF4B4B; }
+            .text-electric { color: #0066FF; }
+            .text-purple { color: #4B2CE1; }
             .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
-            .from-electric-500 { --tw-gradient-from: #0061FF; }
-            .to-coral-500 { --tw-gradient-to: #FF4B4B; }
+            .from-electric { --tw-gradient-from: #0066FF; }
+            .to-purple { --tw-gradient-to: #4B2CE1; }
             .animate-float { animation: float 6s ease-in-out infinite; }
             @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
             .gpu-accelerated { transform: translateZ(0); will-change: transform; }
@@ -114,7 +95,7 @@ export default function RootLayout({
           `
         }} />
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body className="antialiased">
         <PerformanceOptimizer />
         {children}
         <PerformanceMonitor />

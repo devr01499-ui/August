@@ -36,11 +36,11 @@ export default function TopBar() {
         <div className="flex justify-between items-center h-20">
           {/* Logo with clickable heading */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-electric-500 to-coral-500 rounded-xl flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-br from-electric to-purple rounded-xl flex items-center justify-center">
               <span className="text-white font-bold text-lg">A</span>
             </div>
             <div>
-              <h1 className="text-2xl font-heading font-bold text-white group-hover:text-electric-400 transition-colors duration-300">
+              <h1 className="text-2xl font-heading font-bold text-white group-hover:text-electric transition-colors duration-300">
                 AdmirerX
               </h1>
               <p className="text-xs text-white/70 font-medium">We Admire Your Dreams</p>
@@ -55,19 +55,19 @@ export default function TopBar() {
                 href={item.href}
                 className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 ${
                   item.current
-                    ? 'text-electric-400'
+                    ? 'text-electric'
                     : 'text-white/80 hover:text-white'
                 }`}
               >
                 {item.name}
                 {item.current && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-electric-500 to-coral-500 rounded-full"></div>
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-electric to-purple rounded-full"></div>
                 )}
               </Link>
             ))}
             <button
               onClick={() => window.location.href = '/contact'}
-              className="px-6 py-2 bg-gradient-to-r from-electric-500 to-coral-500 text-white font-semibold rounded-xl hover:from-electric-600 hover:to-coral-600 transition-all duration-300 transform hover:scale-105"
+              className="px-6 py-2 bg-gradient-to-r from-electric to-purple text-white font-semibold rounded-xl hover:from-electric-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105"
             >
               Book Appointment
             </button>
@@ -101,7 +101,7 @@ export default function TopBar() {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`block px-4 py-3 text-base font-medium rounded-xl transition-all duration-300 ${
                     item.current
-                      ? 'bg-electric-500/20 text-electric-400 border border-electric-500/30'
+                      ? 'bg-electric/20 text-electric border border-electric/30'
                       : 'text-white/80 hover:text-white hover:bg-white/10'
                   }`}
                 >
@@ -113,7 +113,7 @@ export default function TopBar() {
                   window.location.href = '/contact'
                   setIsMobileMenuOpen(false)
                 }}
-                className="w-full mt-4 px-6 py-3 bg-gradient-to-r from-electric-500 to-coral-500 text-white font-semibold rounded-xl hover:from-electric-600 hover:to-coral-600 transition-all duration-300"
+                className="w-full mt-4 px-6 py-3 bg-gradient-to-r from-electric to-purple text-white font-semibold rounded-xl hover:from-electric-600 hover:to-purple-600 transition-all duration-300"
               >
                 Book Appointment
               </button>

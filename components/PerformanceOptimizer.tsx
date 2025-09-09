@@ -4,6 +4,11 @@ import { useEffect } from 'react'
 
 export default function PerformanceOptimizer() {
   useEffect(() => {
+    // Skip performance optimizations in development for faster loading
+    if (process.env.NODE_ENV === 'development') {
+      return
+    }
+
     // Preload critical resources
     const preloadCriticalResources = () => {
       const criticalImages = [

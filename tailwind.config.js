@@ -9,77 +9,59 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Primary Deep Navy
-        navy: {
-          50: '#F0F4F8',
-          100: '#D9E2EC',
-          200: '#BCCCDC',
-          300: '#9FB3C8',
-          400: '#829AB1',
-          500: '#627D98',
-          600: '#486581',
-          700: '#334E68',
-          800: '#243B53',
-          900: '#0A2540', // Primary Deep Navy
-        },
-        // Electric Blue Accent
-        electric: {
-          50: '#E6F3FF',
-          100: '#B3D9FF',
-          200: '#80BFFF',
-          300: '#4DA6FF',
-          400: '#1A8CFF',
-          500: '#0061FF', // Electric Blue
-          600: '#0052CC',
-          700: '#003D99',
-          800: '#002966',
-          900: '#001433',
-        },
-        // Coral Red Accent
-        coral: {
-          50: '#FFF0F0',
-          100: '#FFD6D6',
-          200: '#FFB3B3',
-          300: '#FF8080',
-          400: '#FF4D4D',
-          500: '#FF4B4B', // Coral Red
-          600: '#E64444',
-          700: '#CC3D3D',
-          800: '#B33636',
-          900: '#992F2F',
-        },
-        // Secondary Background
-        secondary: {
-          50: '#F7F9FC',
-          100: '#E8EDF5',
-          200: '#D1DAE8',
-          300: '#B8C6D9',
-          400: '#9FB2CA',
-          500: '#869EBB',
-          600: '#6D8AAC',
-          700: '#54769D',
-          800: '#3B628E',
-          900: '#224E7F',
-        },
-        // Neutral Text
-        neutral: {
-          50: '#F8F9FA',
-          100: '#E9ECEF',
-          200: '#DEE2E6',
-          300: '#CED4DA',
-          400: '#ADB5BD',
-          500: '#6C757D',
-          600: '#5F6B7A',
-          700: '#495057',
-          800: '#343A40',
-          900: '#212529',
-        },
-        // Light Divider
-        divider: '#E5E9F0',
+        // Original AdmirerX Brand Colors
+        navy: '#0A1B3C',
+        electric: '#0066FF',
+        purple: '#4B2CE1',
+        soft: '#F6F8FC',
+        // Extended navy palette
+        'navy-50': '#F0F4F8',
+        'navy-100': '#D9E2EC',
+        'navy-200': '#BCCCDC',
+        'navy-300': '#9FB3C8',
+        'navy-400': '#829AB1',
+        'navy-500': '#627D98',
+        'navy-600': '#486581',
+        'navy-700': '#334E68',
+        'navy-800': '#243B53',
+        'navy-900': '#0A1B3C',
+        // Extended electric palette
+        'electric-50': '#E6F2FF',
+        'electric-100': '#CCE5FF',
+        'electric-200': '#99CCFF',
+        'electric-300': '#66B2FF',
+        'electric-400': '#3399FF',
+        'electric-500': '#0066FF',
+        'electric-600': '#0052CC',
+        'electric-700': '#004299',
+        'electric-800': '#003366',
+        'electric-900': '#002433',
+        // Extended purple palette
+        'purple-50': '#F3F0FF',
+        'purple-100': '#E6E0FF',
+        'purple-200': '#CCC1FF',
+        'purple-300': '#B3A2FF',
+        'purple-400': '#9983FF',
+        'purple-500': '#4B2CE1',
+        'purple-600': '#3D24B8',
+        'purple-700': '#2F1C8F',
+        'purple-800': '#211466',
+        'purple-900': '#130C3D',
+        // Extended soft palette
+        'soft-50': '#F6F8FC',
+        'soft-100': '#EFF2F7',
+        'soft-200': '#DDE4ED',
+        'soft-300': '#CBD6E3',
+        'soft-400': '#B9C8D9',
+        'soft-500': '#A7BACF',
+        'soft-600': '#95ACC5',
+        'soft-700': '#839EBB',
+        'soft-800': '#7190B1',
+        'soft-900': '#5F82A7',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        heading: ['Poppins', 'system-ui', 'sans-serif'],
+        sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        heading: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

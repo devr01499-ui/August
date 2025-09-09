@@ -70,8 +70,8 @@ export default function ServicesPage() {
         'Employee documentation and record keeping'
       ],
       image: '/images/optimized/hr-consultancy.jpg',
-      color: 'text-electric-500',
-      bgColor: 'bg-electric-500/10',
+      color: 'text-electric',
+      bgColor: 'bg-electric/10',
       onCtaClick: () => setSelectedService('hr-recruitment')
     },
     {
@@ -92,8 +92,8 @@ export default function ServicesPage() {
         'Social media customer service support'
       ],
       image: '/images/optimized/customer-support.jpg',
-      color: 'text-coral-500',
-      bgColor: 'bg-coral-500/10',
+      color: 'text-purple',
+      bgColor: 'bg-purple/10',
       onCtaClick: () => setSelectedService('customer-support')
     },
     {
@@ -114,8 +114,8 @@ export default function ServicesPage() {
         'Lead nurturing and follow-up sequences'
       ],
       image: '/images/optimized/lead-generation.jpg',
-      color: 'text-electric-500',
-      bgColor: 'bg-electric-500/10',
+      color: 'text-electric',
+      bgColor: 'bg-electric/10',
       onCtaClick: () => setSelectedService('lead-generation')
     },
     {
@@ -136,8 +136,8 @@ export default function ServicesPage() {
         'IT infrastructure monitoring and maintenance'
       ],
       image: '/images/optimized/tech-support.jpg',
-      color: 'text-coral-500',
-      bgColor: 'bg-coral-500/10',
+      color: 'text-purple',
+      bgColor: 'bg-purple/10',
       onCtaClick: () => setSelectedService('tech-helpdesk')
     },
     {
@@ -158,8 +158,8 @@ export default function ServicesPage() {
         'Inventory management and tracking'
       ],
       image: '/images/optimized/data-processing.jpg',
-      color: 'text-electric-500',
-      bgColor: 'bg-electric-500/10',
+      color: 'text-electric',
+      bgColor: 'bg-electric/10',
       onCtaClick: () => setSelectedService('data-processing')
     },
     {
@@ -180,8 +180,8 @@ export default function ServicesPage() {
         'Ongoing process improvement and innovation'
       ],
       image: '/images/optimized/it-solutions.jpg',
-      color: 'text-coral-500',
-      bgColor: 'bg-coral-500/10',
+      color: 'text-purple',
+      bgColor: 'bg-purple/10',
       onCtaClick: () => setSelectedService('custom-bpo')
     }
   ]
@@ -229,7 +229,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-24 bg-secondary-50">
+      <section className="py-24 bg-soft">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => (
@@ -248,13 +248,13 @@ export default function ServicesPage() {
                   </div>
                 </div>
                 
-                <h3 className="text-2xl font-heading font-bold text-navy-900 mb-4">{service.title}</h3>
-                <p className="text-neutral-600 mb-6">{service.description}</p>
+                <h3 className="text-2xl font-heading font-bold text-navy mb-4">{service.title}</h3>
+                <p className="text-navy-600 mb-6">{service.description}</p>
                 
                 <ul className="space-y-2 mb-8">
                   {service.features.slice(0, 5).map((feature, index) => (
-                    <li key={index} className="flex items-start text-neutral-600 text-sm">
-                      <div className="w-2 h-2 bg-gradient-to-r from-electric-500 to-coral-500 rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                    <li key={index} className="flex items-start text-navy-600 text-sm">
+                      <div className="w-2 h-2 bg-gradient-to-r from-electric to-purple rounded-full mr-3 mt-2 flex-shrink-0"></div>
                       {feature}
                     </li>
                   ))}
@@ -262,7 +262,7 @@ export default function ServicesPage() {
                 
                 <button
                   onClick={handleBookAppointment}
-                  className="w-full py-3 bg-gradient-to-r from-electric-500 to-coral-500 text-white font-semibold rounded-xl hover:from-electric-600 hover:to-coral-600 transition-all duration-300"
+                  className="w-full py-3 bg-gradient-to-r from-electric to-purple text-white font-semibold rounded-xl hover:from-electric-600 hover:to-purple-600 transition-all duration-300"
                 >
                   Book Appointment
                 </button>

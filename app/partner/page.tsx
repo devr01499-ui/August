@@ -55,19 +55,19 @@ export default function PartnerPage() {
       title: 'Seamless Integration',
       description: 'Our advanced technology stack integrates seamlessly with your existing systems, ensuring minimal disruption and maximum efficiency.',
       icon: HandshakeIcon,
-      color: 'text-electric-500'
+      color: 'text-electric'
     },
     {
       title: 'Shared Growth Revenue',
       description: 'We believe in mutual success. Our revenue-sharing model ensures that as you grow, we grow together, creating a true partnership.',
       icon: GrowthIcon,
-      color: 'text-coral-500'
+      color: 'text-purple'
     },
     {
       title: 'Dedicated Support',
       description: 'Every partner gets a dedicated account manager and 24/7 support to ensure your success and quick resolution of any issues.',
       icon: SupportIcon,
-      color: 'text-electric-500'
+      color: 'text-electric'
     }
   ]
 
@@ -116,28 +116,28 @@ export default function PartnerPage() {
       title: 'Initial Consultation',
       description: 'We discuss your business goals, requirements, and how our partnership can drive mutual success.',
       icon: HandshakeIcon,
-      color: 'text-electric-500'
+      color: 'text-electric'
     },
     {
       step: 2,
       title: 'Partnership Agreement',
       description: 'We create a customized partnership agreement that aligns with your business model and objectives.',
       icon: ShieldIcon,
-      color: 'text-coral-500'
+      color: 'text-purple'
     },
     {
       step: 3,
       title: 'Onboarding & Training',
       description: 'Comprehensive training and onboarding to ensure you have everything needed for success.',
       icon: RocketIcon,
-      color: 'text-electric-500'
+      color: 'text-electric'
     },
     {
       step: 4,
       title: 'Launch & Support',
       description: 'We launch your partnership with ongoing support and regular check-ins to ensure success.',
       icon: NetworkIcon,
-      color: 'text-coral-500'
+      color: 'text-purple'
     }
   ]
 
@@ -146,11 +146,11 @@ export default function PartnerPage() {
       <TopBar />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-navy-900 via-navy-800 to-electric-900 pt-20">
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-navy via-navy-800 to-electric-900 pt-20">
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0 bg-gradient-to-r from-electric-500/20 to-coral-500/20 animate-pulse"></div>
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-electric-500/10 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-coral-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-electric/20 to-purple/20 animate-pulse"></div>
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-electric/10 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -185,13 +185,13 @@ export default function PartnerPage() {
       </section>
 
       {/* Value Pillars Section */}
-      <section className="py-24 bg-secondary-50">
+      <section className="py-24 bg-soft">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-navy-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-navy mb-6">
               Why Partner With Us?
             </h2>
-            <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
+            <p className="text-xl text-navy-600 max-w-3xl mx-auto">
               Our partnership program is designed to create mutual value and long-term success for all parties involved.
             </p>
           </div>
@@ -199,11 +199,11 @@ export default function PartnerPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {valuePillars.map((pillar, index) => (
               <div key={pillar.title} className="bg-white rounded-2xl shadow-lg p-8 group hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <div className="w-16 h-16 bg-gradient-to-br from-electric-500 to-coral-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-16 h-16 bg-gradient-to-br from-electric to-purple rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <pillar.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-heading font-bold text-navy-900 mb-4">{pillar.title}</h3>
-                <p className="text-neutral-600 leading-relaxed">{pillar.description}</p>
+                <h3 className="text-2xl font-heading font-bold text-navy mb-4">{pillar.title}</h3>
+                <p className="text-navy-600 leading-relaxed">{pillar.description}</p>
               </div>
             ))}
           </div>
@@ -231,7 +231,7 @@ export default function PartnerPage() {
                 <ul className="space-y-3 mb-8">
                   {program.benefits.map((benefit, benefitIndex) => (
                     <li key={benefitIndex} className="flex items-center text-white/70 text-sm">
-                      <div className="w-2 h-2 bg-gradient-to-r from-electric-500 to-coral-500 rounded-full mr-3 flex-shrink-0"></div>
+                      <div className="w-2 h-2 bg-gradient-to-r from-electric to-purple rounded-full mr-3 flex-shrink-0"></div>
                       {benefit}
                     </li>
                   ))}

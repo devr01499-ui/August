@@ -56,37 +56,37 @@ export default function CareersPage() {
       title: 'Professional Growth',
       description: 'Access to world-class training programs, certifications, and mentorship opportunities that accelerate your career development.',
       icon: GrowthIcon,
-      color: 'text-electric-500'
+      color: 'text-electric'
     },
     {
       title: 'Industry Exposure',
       description: 'Work with diverse clients across various industries, gaining valuable experience and expanding your professional network.',
       icon: NetworkIcon,
-      color: 'text-coral-500'
+      color: 'text-purple'
     },
     {
       title: 'Skill Development',
       description: 'Continuous learning opportunities with cutting-edge technologies and methodologies that keep you ahead of the curve.',
       icon: TrainingIcon,
-      color: 'text-electric-500'
+      color: 'text-electric'
     },
     {
       title: 'Career Advancement',
       description: 'Clear career progression paths with regular performance reviews and opportunities for promotion and leadership roles.',
       icon: AchievementIcon,
-      color: 'text-coral-500'
+      color: 'text-purple'
     },
     {
       title: 'Work-Life Balance',
       description: 'Flexible working arrangements, comprehensive benefits, and a supportive culture that values your personal well-being.',
       icon: CultureIcon,
-      color: 'text-electric-500'
+      color: 'text-electric'
     },
     {
       title: 'Competitive Rewards',
       description: 'Attractive compensation packages, performance bonuses, and recognition programs that reward your contributions.',
       icon: RewardsIcon,
-      color: 'text-coral-500'
+      color: 'text-purple'
     }
   ]
 
@@ -95,9 +95,9 @@ export default function CareersPage() {
       <TopBar />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-navy-900 via-navy-800 to-electric-900 pt-20">
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-navy via-navy-800 to-electric-900 pt-20">
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0 bg-gradient-to-r from-electric-500/20 to-coral-500/20 animate-pulse"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-electric/20 to-purple/20 animate-pulse"></div>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -132,13 +132,13 @@ export default function CareersPage() {
       </section>
 
       {/* Join Our Team Section */}
-      <section className="py-24 bg-secondary-50">
+      <section className="py-24 bg-soft">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-navy-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-navy mb-6">
               Join Our Team
             </h2>
-            <p className="text-xl text-neutral-600 max-w-4xl mx-auto">
+            <p className="text-xl text-navy-600 max-w-4xl mx-auto">
               Be part of a dynamic team that's shaping the future of business process outsourcing. 
               Discover exciting career opportunities and grow with us.
             </p>
@@ -146,15 +146,15 @@ export default function CareersPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h3 className="text-3xl font-heading font-bold text-navy-900 mb-6">
+              <h3 className="text-3xl font-heading font-bold text-navy mb-6">
                 World-Class Training & Development
               </h3>
-              <p className="text-lg text-neutral-600 mb-6 leading-relaxed">
+              <p className="text-lg text-navy-600 mb-6 leading-relaxed">
                 At AdmirerX, we believe in investing in our people. Our comprehensive training programs 
                 cover everything from technical skills to soft skills, ensuring you're equipped to excel 
                 in your role and advance in your career.
               </p>
-              <p className="text-lg text-neutral-600 mb-8 leading-relaxed">
+              <p className="text-lg text-navy-600 mb-8 leading-relaxed">
                 We provide access to industry certifications, mentorship programs, and continuous learning 
                 opportunities that keep you ahead of the curve in the rapidly evolving BPO landscape.
               </p>
@@ -229,7 +229,7 @@ export default function CareersPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={handleApplyNow}
-              className="px-8 py-4 bg-white text-navy-900 font-semibold rounded-xl hover:bg-white/90 transition-all duration-300 transform hover:scale-105"
+              className="px-8 py-4 bg-white text-navy font-semibold rounded-xl hover:bg-white/90 transition-all duration-300 transform hover:scale-105"
             >
               Apply Now
             </button>

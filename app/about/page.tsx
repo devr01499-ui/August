@@ -86,9 +86,9 @@ export default function About() {
       <TopBar />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-navy-900 via-navy-800 to-electric-900 pt-20">
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-navy via-navy-800 to-electric-900 pt-20">
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0 bg-gradient-to-r from-electric-500/20 to-coral-500/20 animate-pulse"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-electric/20 to-purple/20 animate-pulse"></div>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -124,28 +124,28 @@ export default function About() {
       </section>
 
       {/* Our Story Section */}
-      <section className="py-24 bg-secondary-50">
+      <section className="py-24 bg-soft">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-navy-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-navy mb-6">
               Our Story
             </h2>
-            <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
+            <p className="text-xl text-navy-600 max-w-3xl mx-auto">
               From vision to reality, discover how AdmirerX became a trusted partner for businesses worldwide.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h3 className="text-3xl font-heading font-bold text-navy-900 mb-6">
+              <h3 className="text-3xl font-heading font-bold text-navy mb-6">
                 Founded on Excellence
               </h3>
-              <p className="text-lg text-neutral-600 mb-6 leading-relaxed">
+              <p className="text-lg text-navy-600 mb-6 leading-relaxed">
                 AdmirerX was founded with a clear mission: to transform the BPO industry through exceptional service 
                 and innovative solutions. We recognized that businesses needed more than just outsourcing – they 
                 needed a true partner who understood their goals and challenges.
               </p>
-              <p className="text-lg text-neutral-600 mb-6 leading-relaxed">
+              <p className="text-lg text-navy-600 mb-6 leading-relaxed">
                 Our journey began with a small team of dedicated professionals who shared a common vision: to 
                 create a company that would not just meet expectations, but exceed them at every turn. Today, 
                 we're proud to serve clients across various industries, helping them achieve their business 
@@ -204,7 +204,7 @@ export default function About() {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <div className="absolute top-4 right-4 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
-                    <value.icon className="w-6 h-6 text-electric-400" />
+                    <value.icon className="w-6 h-6 text-electric" />
                   </div>
                 </div>
                 
@@ -217,7 +217,7 @@ export default function About() {
       </section>
 
       {/* Let's Build Success Together Section */}
-      <section className="py-24 bg-gradient-to-r from-electric-500 to-coral-500">
+      <section className="py-24 bg-gradient-to-r from-electric to-purple">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">
             Let's Build Success Together
@@ -234,7 +234,7 @@ export default function About() {
           </p>
           <button
             onClick={() => window.location.href = '/contact'}
-            className="px-8 py-4 bg-white text-navy-900 font-semibold rounded-xl hover:bg-white/90 transition-all duration-300 transform hover:scale-105"
+            className="px-8 py-4 bg-white text-navy font-semibold rounded-xl hover:bg-white/90 transition-all duration-300 transform hover:scale-105"
           >
             Start Your Journey
           </button>

@@ -84,21 +84,21 @@ export default function Home() {
       title: 'Discovery & Analysis',
       description: 'We analyze your business needs, current processes, and identify optimization opportunities to design the perfect BPO solution.',
       icon: PlugIcon,
-      color: 'text-electric-500'
+      color: 'text-electric'
     },
     {
       step: 2,
       title: 'Implementation & Integration',
       description: 'Our expert team implements the solution with seamless integration, ensuring minimal disruption to your operations.',
       icon: GrowthIcon,
-      color: 'text-coral-500'
+      color: 'text-purple'
     },
     {
       step: 3,
       title: 'Ongoing Support & Optimization',
       description: 'We provide continuous monitoring, support, and optimization to ensure your BPO solution delivers maximum value.',
       icon: SupportIcon,
-      color: 'text-electric-500'
+      color: 'text-electric'
     }
   ]
 
@@ -117,8 +117,8 @@ export default function Home() {
         'Talent management'
       ],
       image: '/images/optimized/hr-consultancy.jpg',
-      color: 'text-electric-500',
-      bgColor: 'bg-electric-500/10'
+      color: 'text-electric',
+      bgColor: 'bg-electric/10'
     },
     {
       id: 'customer-support',
@@ -133,8 +133,8 @@ export default function Home() {
         'Quality assurance monitoring'
       ],
       image: '/images/optimized/customer-support.jpg',
-      color: 'text-coral-500',
-      bgColor: 'bg-coral-500/10'
+      color: 'text-purple',
+      bgColor: 'bg-purple/10'
     },
     {
       id: 'lead-generation',
@@ -149,8 +149,8 @@ export default function Home() {
         'Conversion tracking'
       ],
       image: '/images/optimized/lead-generation.jpg',
-      color: 'text-electric-500',
-      bgColor: 'bg-electric-500/10'
+      color: 'text-electric',
+      bgColor: 'bg-electric/10'
     },
     {
       id: 'tech-helpdesk',
@@ -165,8 +165,8 @@ export default function Home() {
         'Performance monitoring'
       ],
       image: '/images/optimized/tech-support.jpg',
-      color: 'text-coral-500',
-      bgColor: 'bg-coral-500/10'
+      color: 'text-purple',
+      bgColor: 'bg-purple/10'
     },
     {
       id: 'data-processing',
@@ -181,8 +181,8 @@ export default function Home() {
         'Secure data handling'
       ],
       image: '/images/optimized/data-processing.jpg',
-      color: 'text-electric-500',
-      bgColor: 'bg-electric-500/10'
+      color: 'text-electric',
+      bgColor: 'bg-electric/10'
     },
     {
       id: 'custom-bpo',
@@ -197,8 +197,8 @@ export default function Home() {
         'Dedicated support'
       ],
       image: '/images/optimized/it-solutions.jpg',
-      color: 'text-coral-500',
-      bgColor: 'bg-coral-500/10'
+      color: 'text-purple',
+      bgColor: 'bg-purple/10'
     }
   ]
 
@@ -208,12 +208,12 @@ export default function Home() {
       <TopBar />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-navy-900 via-navy-800 to-electric-900">
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-navy via-navy-800 to-electric-900">
         {/* Animated Background */}
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0 bg-gradient-to-r from-electric-500/20 to-coral-500/20 animate-pulse"></div>
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-electric-500/10 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-coral-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-electric/20 to-purple/20 animate-pulse"></div>
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-electric/10 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -234,15 +234,15 @@ export default function Home() {
               {/* Updated stats */}
               <div className="flex flex-wrap gap-8 justify-center lg:justify-start mb-10">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-electric-400 mb-2">Dedicated Account Manager</div>
+                  <div className="text-3xl font-bold text-electric mb-2">Dedicated Account Manager</div>
                   <div className="text-white/70 text-sm">Personalized Support</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-coral-400 mb-2">ISO 27001</div>
+                  <div className="text-3xl font-bold text-purple mb-2">ISO 27001</div>
                   <div className="text-white/70 text-sm">Security Certified</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-electric-400 mb-2">24/7</div>
+                  <div className="text-3xl font-bold text-electric mb-2">24/7</div>
                   <div className="text-white/70 text-sm">Support</div>
                 </div>
               </div>
@@ -250,7 +250,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <button
                   onClick={handleBookAppointment}
-                  className="px-8 py-4 bg-gradient-to-r from-electric-500 to-coral-500 text-white font-semibold rounded-xl hover:from-electric-600 hover:to-coral-600 transition-all duration-300 transform hover:scale-105"
+                  className="px-8 py-4 bg-gradient-to-r from-electric to-purple text-white font-semibold rounded-xl hover:from-electric-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105"
                 >
                   Book Appointment
                 </button>
@@ -281,13 +281,13 @@ export default function Home() {
       </section>
 
       {/* How We Work Section */}
-      <section className="py-24 bg-secondary-50">
+      <section className="py-24 bg-soft">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-navy-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-navy mb-6">
               How We Work
             </h2>
-            <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
+            <p className="text-xl text-navy-600 max-w-3xl mx-auto">
               Our proven 3-step process ensures seamless integration and maximum value delivery.
             </p>
           </div>
@@ -296,15 +296,15 @@ export default function Home() {
             {solutionSteps.map((step, index) => (
               <div key={step.step} className="text-center group">
                 <div className="relative mb-8">
-                  <div className="w-20 h-20 mx-auto bg-gradient-to-br from-electric-500 to-coral-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-20 h-20 mx-auto bg-gradient-to-br from-electric to-purple rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                     <step.icon className="w-10 h-10 text-white" />
                   </div>
                   <div className="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg">
                     <span className="text-sm font-bold text-navy-900">{step.step}</span>
                   </div>
                 </div>
-                <h3 className="text-2xl font-heading font-bold text-navy-900 mb-4">{step.title}</h3>
-                <p className="text-neutral-600 leading-relaxed">{step.description}</p>
+                <h3 className="text-2xl font-heading font-bold text-navy mb-4">{step.title}</h3>
+                <p className="text-navy-600 leading-relaxed">{step.description}</p>
               </div>
             ))}
           </div>
@@ -346,7 +346,7 @@ export default function Home() {
                 <ul className="space-y-2 mb-6">
                   {service.features.slice(0, 3).map((feature, index) => (
                     <li key={index} className="flex items-center text-white/70 text-sm">
-                      <div className="w-2 h-2 bg-gradient-to-r from-electric-500 to-coral-500 rounded-full mr-3"></div>
+                      <div className="w-2 h-2 bg-gradient-to-r from-electric to-purple rounded-full mr-3"></div>
                       {feature}
                     </li>
                   ))}
@@ -354,7 +354,7 @@ export default function Home() {
                 
                 <button
                   onClick={handleBookAppointment}
-                  className="w-full py-3 bg-gradient-to-r from-electric-500 to-coral-500 text-white font-semibold rounded-xl hover:from-electric-600 hover:to-coral-600 transition-all duration-300"
+                  className="w-full py-3 bg-gradient-to-r from-electric to-purple text-white font-semibold rounded-xl hover:from-electric-600 hover:to-purple-600 transition-all duration-300"
                 >
                   Book Appointment
                 </button>
@@ -365,7 +365,7 @@ export default function Home() {
       </section>
 
       {/* Partner CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-electric-500 to-coral-500">
+      <section className="py-24 bg-gradient-to-r from-electric to-purple">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">
             Partner With Us
@@ -376,7 +376,7 @@ export default function Home() {
           </p>
           <button
             onClick={handlePartnerWithUs}
-            className="px-8 py-4 bg-white text-navy-900 font-semibold rounded-xl hover:bg-white/90 transition-all duration-300 transform hover:scale-105"
+            className="px-8 py-4 bg-white text-navy font-semibold rounded-xl hover:bg-white/90 transition-all duration-300 transform hover:scale-105"
           >
             Get Started Today
           </button>

@@ -4,6 +4,11 @@ import { useEffect } from 'react'
 
 export default function PerformanceMonitor() {
   useEffect(() => {
+    // Skip performance monitoring in development for faster loading
+    if (process.env.NODE_ENV === 'development') {
+      return
+    }
+
     // Performance monitoring - only run on client side
     if (typeof window === 'undefined' || !('performance' in window)) {
       return
